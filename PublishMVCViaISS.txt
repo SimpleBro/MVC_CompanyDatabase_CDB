@@ -1,0 +1,59 @@
+ISS Summary:
+
+	1. WebDeploy_x64_en-US install
+	
+	2. Control panel -> Programs and Features -> Turn Windows features on or off
+		-> .NET Framework 3.5
+		-> .NET Framework 4.8 Advanced Services
+		-> Internet Information Service (Sve unutar njega i njegovih foldera ukluciti!)
+			-> FTP Server
+				-> FTP Service
+			-> Web Management Tools
+				-> ISS 6 Management Compatibility
+				-> ISS Management Console
+			-> World Wide Web Service
+				-> SVE
+		-> Internet Information Service Hostable Web Core
+		
+	3. Publish MVC (file sistem za local??) u folder koji se nalazi negdje na disku
+		-> Ime filea preferabli nesto kao helpsplitbp.com
+		-> Desni klik na cijeli file -> Properties -> Security -> Edit.. -> Add... -> 
+			Advanced... -> Find Now -> Everyone -> Ok -> Daj sve ovalasti? 
+			
+	4. Run: inetmgr -> otvara se ISS
+		-> Sites
+			-> Add Website...
+				-> Site name/App pool/Host name => helpsplitbp.com
+				-> Physical path
+					-> Putanja u kojoj se nalazi "published" datoteka MVC-a 
+					koja je prethodno ovlastena za everyone
+		-> Application pool (koji koristis)
+			-> Advanced Settings
+				-> Identity
+					-> NetworkService
+		-> Sites
+			-> U promatranoj web stranici udji u "Authentication"
+				-> ASP.NET Impersonation -> Disabled
+				-> Forms Authentication -> Disabled
+				-> Anonymoust Authentication
+					-> Desni klik -> Edit...
+						-> Application pool identity
+		-> Isti file na kojem se nalazi published projekt i koji je prethodno ovlasten za sve
+		kopiraj i premjesti u C:\inetpub\wwwroot
+	
+	5. Idi do C:\Windows\System32\drivers\etc
+		-> otvori file hosts kao administrator
+			-> na dno datoteke dodaj: (localhost splitbp....)
+				127.0.0.1 www.splitbp.com
+				127.0.0.1 splitbp.com
+	
+	6. Otvori koristenu bazu podataka
+		-> Idi na Security
+			-> Add user
+				-> Stvori korisnika koji ima ovlati "owner"
+					User name: NT AUTHORITY\NETWORK SERVICE
+					Login name: NT AUTHORITY\NETWORK SERVICE
+					Default schema: db_owner
+				-> U svaku rubriku sa lijeve strane (select a page) oznaci db_owner (owner)
+	
+	7. U adress bar napisi: splitbp.com

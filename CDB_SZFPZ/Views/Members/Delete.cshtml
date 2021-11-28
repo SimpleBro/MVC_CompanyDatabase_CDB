@@ -1,0 +1,61 @@
+﻿@model CDB_SZFPZ.Models.ClanFROdbora
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 style="text-align:center">Izbriši člana @Model.ImePrezime</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    E-mail
+                </label>
+                <p>@Html.DisplayFor(model => model.EmailClana)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Mobitel
+                </label>
+                <p>@Html.DisplayFor(model => model.MobitelKontakt)</p>
+            </div>
+            <div class="col-sm-2">
+                <label style="clear: both; text-align: left;">
+                    Modul
+                </label>
+                <p>@Html.DisplayFor(model => model.ModuliFPZ.NazivModula)</p>
+            </div>
+            <div class="col-sm-2">
+                <label style="clear: both; text-align: left;">
+                    Uloga
+                </label>
+                <p>@Html.DisplayFor(model => model.UlogaUSustavu.NazivUloge)</p>
+            </div>
+            <div class="col-sm-2">
+                <label style="clear: both; text-align: left;">
+                    Aktivan
+                </label>
+                <p>@Html.DisplayFor(model => model.AktivanClan.Aktivan)</p>
+            </div>
+        </div>
+    </dl>
+
+    <hr />
+
+    <h4 style="text-align:center">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" style="font-size : 14px; height:50px; width:160px;" />
+            </div>
+        }
+        <hr />
+        @Html.ActionLink("Uredi člana", "Edit", new { id = Model.IDClan }) |
+        @Html.ActionLink("Detalji člana", "Details", new { id = Model.IDClan }) |
+        @Html.ActionLink("Popis članova", "Index")
+    </h4>
+</div>

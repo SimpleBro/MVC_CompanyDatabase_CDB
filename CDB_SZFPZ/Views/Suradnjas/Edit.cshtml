@@ -1,0 +1,116 @@
+﻿@model CDB_SZFPZ.Models.Suradnja
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 style="text-align:center">Uredi suradnju s kompanijom @ViewBag.NazivK</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <dl class="dl-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.IDSuradnja)
+            <div class="row">
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Projekt* | @Html.ActionLink("Stvori novi projekt", "Create", "Projekts")
+                    </label>
+                    @Html.DropDownList("IDProjekt", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IDProjekt, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Kompanija* | @Html.ActionLink("Stvori novu kompaniju", "Create", "Kompanijas")
+                    </label>
+                    @Html.DropDownList("IDKompanija", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IDKompanija, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Odgovorni član*
+                    </label>
+                    @Html.DropDownList("OdgovoranClan", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.OdgovoranClan, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Kontakt* | @Html.ActionLink("Stvori novi konrakt", "Create", "Kontakti")
+                    </label>
+                    @Html.DropDownList("KontaktKompanije", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.KontaktKompanije, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Status suradnje*
+                    </label>
+                    @Html.DropDownList("StatusSuradnja", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StatusSuradnja, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Datum zadnjeg kontakta*
+                    </label>
+                    @Html.EditorFor(model => model.DatumZadnjegKontakta, new { htmlAttributes = new { @Value = ViewBag.DatumZK, @class = "form-control", style = "text-align:center;" } })
+                    @Html.ValidationMessageFor(model => model.DatumZadnjegKontakta, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Tip suradnje
+                    </label>
+                    @Html.DropDownList("TipSuradnja", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TipSuradnja, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Ostvarena financijska vrijednost [HRK]
+                    </label>
+                    @Html.EditorFor(model => model.FinancijskaVrijednost, new { htmlAttributes = new { @min = 0, @class = "form-control", style = "text-align:center;" } })
+                    @Html.ValidationMessageFor(model => model.FinancijskaVrijednost, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <label style="clear: both; text-align: left;">
+                        Prikupljena materijalna sredstva
+                    </label>
+                    @Html.TextArea("MaterijalnaVrijednost", (string)(ViewBag.Mat), new { @class = "form-control", style = "text-align:center;" })
+                    @Html.ValidationMessageFor(model => model.MaterijalnaVrijednost, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-lg-6">
+                    <label style="clear: both; text-align: left;">
+                        Komentar suradnje
+                    </label>
+                    @Html.TextArea("KomentarSuradnja", (string)(ViewBag.Mat), new { @class = "form-control", style = "text-align:center;" })
+                    @Html.ValidationMessageFor(model => model.KomentarSuradnja, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </dl>
+
+        <hr />
+
+        <h4 style="text-align:center">
+           <div class="form-group">
+               <div class="form-actions no-color">
+                   <input type="submit" value="Save" class="btn btn-default" style="font-size : 14px; height:50px; width:160px;" />
+               </div>
+           </div>
+           <hr />
+           @Html.ActionLink("Detalji suradnje", "Details", new { id = Model.IDSuradnja }) |
+           @Html.ActionLink("Izbriši suradnju", "Delete", new { id = Model.IDSuradnja }) |
+           @Html.ActionLink("Popis suradnji", "Index")
+       </h4>
+    </div>
+}

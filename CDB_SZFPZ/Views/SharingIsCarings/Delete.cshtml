@@ -1,0 +1,67 @@
+﻿@model CDB_SZFPZ.Models.SharingIsCaring
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 style="text-align:center">Izbriši primjer člana @Html.DisplayFor(model => model.ClanFROdbora.ImePrezime)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="col-sm-3">
+                <label>Kompanija</label>
+                <p>@Html.DisplayFor(model => model.Kompanija.NazivKompanija)</p>
+            </div>
+            <div class="col-sm-3">
+                <label>Kontakt</label>
+                <p>@Html.DisplayFor(model => model.KontaktKompanije1.ImePrezimeKontakta)</p>
+            </div>
+            <div class="col-sm-3">
+                <label>Tip suradnje</label>
+                <p>@Html.DisplayFor(model => model.TipSuradnje.TipSuradnja)</p>
+            </div>
+            <div class="col-sm-3">
+                <label>Datum zadnje izmjene</label>
+                <p>@Model.DatumIzmjene.Value.Date.ToString("dd'/'M'/'yyyy")</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-12">
+                <label>Komentar</label>
+                @Html.TextArea("OsobniKomentarDopisa", (string)(ViewBag.Kom), new { @class = "form-control", @Value = ViewBag.Kom, @placeholder = "Enter a value", style = "text-align:center;" })
+                @*<p>@Html.DisplayFor(model => model.OsobniKomentarDopisa)</p>*@
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-12">
+                <label>Primjer dopisa</label>
+                @Html.TextArea("PrimjerDopisa", (string)(ViewBag.Dopis), new { @class = "form-control", @Value = ViewBag.Dopis, @placeholder = "Enter a value", style = "text-align:center;" })
+                @*<p>@Html.DisplayFor(model => model.PrimjerDopisa)</p>*@
+            </div>
+        </div>
+    </dl>
+
+    <hr />
+
+    <h4 style="text-align:center">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" style="font-size : 14px; height:50px; width:160px;" />
+            </div>
+        }
+        <hr />
+        @Html.ActionLink("Uredi primjer", "Edit", new { id = Model.IDSiC }) |
+        @Html.ActionLink("Detalji primjera", "Details", new { id = Model.IDSiC }) |
+        @Html.ActionLink("Popis primjera", "Index")
+    </h4>
+</div>

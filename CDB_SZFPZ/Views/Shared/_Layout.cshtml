@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - CDB</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Help-BP", "HomePage", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                <img src="~/Slike/CDB.png" alt="Im dead" class="img-circle navbar-left" height="50" width="50" />
+                <span class="glyphicon glyphicon-home navbar-left" style="color:limegreen"></span>
+                @Html.ActionLink("CDB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand navbar-left" })
+                <span class="glyphicon glyphicon-fire navbar-left" style="color:limegreen"></span>
+                @Html.ActionLink("Natječaj", "Index", "Projekts", new { area = "" }, new { @class = "navbar-brand navbar-left" })
+                <span class="glyphicon glyphicon-book navbar-left" style="color:limegreen"></span>
+                @Html.ActionLink("Projekt", "Index", "Projekts", new { area = "" }, new { @class = "navbar-brand navbar-left" })
+                <span class="glyphicon glyphicon-briefcase navbar-left" style="color:limegreen"></span>
+                @Html.ActionLink("Kompanija", "Index", "Kompanijas", new { area = "" }, new { @class = "navbar-brand navbar-left" })
+                <span class="glyphicon glyphicon-phone-alt navbar-left" style="color:limegreen"></span>
+                @Html.ActionLink("Kontakt", "Index", "Kontakti", new { area = "" }, new { @class = "navbar-brand navbar-left" })
+                <span class="glyphicon glyphicon-shopping-cart navbar-left" style="color:limegreen"></span>
+                @Html.ActionLink("Suradnja", "Index", "Suradnjas", new { area = "" }, new { @class = "navbar-brand navbar-left" })
+                <span class="glyphicon glyphicon-stats navbar-left" style="color:limegreen"></span>
+                @Html.ActionLink("Statistika", "Index", "Statistika", new { area = "" }, new { @class = "navbar-brand navbar-left" })
+                <span class="glyphicon glyphicon-heart navbar-left" style="color:limegreen"></span>
+                @Html.ActionLink("Iskustva", "Index", "SharingIsCarings", new { area = "" }, new { @class = "navbar-brand navbar-left" })
+                <span class="glyphicon glyphicon-flag navbar-left" style="color:limegreen"></span>
+                @Html.ActionLink("Članovi", "Index", "Members", new { area = "" }, new { @class = "navbar-brand navbar-left" })
+                <span class="glyphicon glyphicon-user navbar-left" style="color:limegreen"></span>
+                @Html.ActionLink("Profil", "UserProfile", "Members", new { area = "" }, new { @class = "navbar-brand navbar-left" })
+                <span class="glyphicon glyphicon-log-out navbar-left" style="color:limegreen"></span>
+                @Html.ActionLink("Odjava", "LogOut", "CDBLogin", new { area = "" }, new { @class = "navbar-brand navbar-left" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
+            </div>
+        </div>
+    </div>
+
+    <body class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - SZFPZ</p>
+        </footer>
+    </body>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

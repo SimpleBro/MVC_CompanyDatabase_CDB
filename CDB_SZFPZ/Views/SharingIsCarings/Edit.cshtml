@@ -1,0 +1,97 @@
+﻿@model CDB_SZFPZ.Models.SharingIsCaring
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 style="text-align:center">Uredi primjer korisnika @Model.ClanFROdbora.ImePrezime</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IDSiC)
+        <div class="row">
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        CDB Član*
+                    </label>
+                    @Html.DropDownList("OdgClan", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.OdgClan, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Kompanija*
+                    </label>
+                    @Html.DropDownList("IDKompanija", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IDKompanija, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Kontakt*
+                    </label>
+                    @Html.DropDownList("KontaktKompanije", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.KontaktKompanije, "", new { @class = "text-danger" })
+                </div>
+        </div>
+
+            <hr />
+
+        <div class="row">
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Datum zadnje izmjene*
+                    </label>
+                    @Html.EditorFor(model => model.DatumIzmjene, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter a value", style = "text-align:center;" } })
+                    @Html.ValidationMessageFor(model => model.DatumIzmjene, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Tip suradnje
+                    </label>
+                    @Html.DropDownList("VrstaDopisa", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TipSuradnje, "", new { @class = "text-danger" })
+                </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-12">
+                <label style="clear: both; text-align: left;">
+                    Komentar
+                </label>
+                @Html.TextArea("OsobniKomentarDopisa", (string)(ViewBag.Kom), new { @class = "form-control", @Value = ViewBag.Kom, @placeholder = "Enter a value", style = "text-align:center;" })
+                @Html.ValidationMessageFor(model => model.OsobniKomentarDopisa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-12">
+                <label style="clear: both; text-align: left;">
+                    Primjer dopisa
+                </label>
+                @Html.TextArea("PrimjerDopisa", (string)(ViewBag.Dopis), new { @class = "form-control", @Value = ViewBag.Dopis, @placeholder = "Enter a value", style = "text-align:center;" })
+                @Html.ValidationMessageFor(model => model.PrimjerDopisa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+       <h4 style="text-align:center">
+           <div class="form-group">
+               <div class="form-actions no-color">
+                   <input type="submit" value="Edit" class="btn btn-default" style="font-size : 14px; height:50px; width:160px;" />
+               </div>
+           </div>
+           <hr />
+           @Html.ActionLink("Detalji primjera", "Details", new { id = Model.IDSiC }) |
+           @Html.ActionLink("Izbriši primjera", "Delete", new { id = Model.IDSiC }) |
+           @Html.ActionLink("Popis primjera", "Index")
+       </h4>
+    </div>
+}

@@ -1,0 +1,1594 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AktivanClan">
+          <Key>
+            <PropertyRef Name="IDAktivan" />
+          </Key>
+          <Property Name="IDAktivan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Aktivan" Type="nvarchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClanFROdbora">
+          <Key>
+            <PropertyRef Name="IDClan" />
+          </Key>
+          <Property Name="IDClan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImeClana" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PrezimeClana" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailClana" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MobitelKontakt" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModulClana" Type="int" />
+          <Property Name="KorisnickoImeClana" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LozinkaClana" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Uloga" Type="int" Nullable="false" />
+          <Property Name="Aktivan" Type="int" Nullable="false" />
+          <Property Name="ImePrezime" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Kompanija">
+          <Key>
+            <PropertyRef Name="IDKompanija" />
+          </Key>
+          <Property Name="IDKompanija" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivKompanija" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="OpisKompanija" Type="nvarchar(max)" />
+          <Property Name="AdresaKompanija" Type="nvarchar" MaxLength="500" />
+          <Property Name="PoštanskiBrojKompanija" Type="nvarchar" MaxLength="50" />
+          <Property Name="DrzavaKompanija" Type="nvarchar" MaxLength="50" />
+          <Property Name="GradKompanija" Type="nvarchar" MaxLength="50" />
+          <Property Name="TelefonKompanija" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="KontaktKompanije">
+          <Key>
+            <PropertyRef Name="IDKontakt" />
+          </Key>
+          <Property Name="IDKontakt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImeKontakt" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PrezimeKontakt" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailKontakt" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TelefonKontakt" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobitelKontakt" Type="nvarchar" MaxLength="50" />
+          <Property Name="FunkcijaUKompaniji" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="OpisKontakta" Type="nvarchar(max)" />
+          <Property Name="ZaposlenValidan" Type="bit" Nullable="false" />
+          <Property Name="IDKompanijaKontakta" Type="int" Nullable="false" />
+          <Property Name="ImePrezimeKontakta" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ModuliFPZ">
+          <Key>
+            <PropertyRef Name="IDModula" />
+          </Key>
+          <Property Name="IDModula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivModula" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrioritetProjekta">
+          <Key>
+            <PropertyRef Name="IDPrior" />
+          </Key>
+          <Property Name="IDPrior" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RazinaPrioriteta" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Projekt">
+          <Key>
+            <PropertyRef Name="IDProjekt" />
+          </Key>
+          <Property Name="IDProjekt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivProjekt" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="OpisProjekt" Type="nvarchar(max)" />
+          <Property Name="WebAdresaProjekta" Type="nvarchar" MaxLength="300" />
+          <Property Name="GodinaProjekt" Type="datetime" />
+          <Property Name="CiljFRFinancije" Type="int" />
+          <Property Name="CiljFRMaterijali" Type="nvarchar(max)" />
+          <Property Name="StatusProjekta" Type="int" Nullable="false" />
+          <Property Name="PrioritetProjekta" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SharingIsCaring">
+          <Key>
+            <PropertyRef Name="IDSiC" />
+          </Key>
+          <Property Name="IDSiC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatumIzmjene" Type="datetime" />
+          <Property Name="PrimjerDopisa" Type="nvarchar(max)" />
+          <Property Name="OsobniKomentarDopisa" Type="nvarchar(max)" />
+          <Property Name="OdgClan" Type="int" Nullable="false" />
+          <Property Name="KontaktKompanije" Type="int" />
+          <Property Name="IDKompanija" Type="int" />
+          <Property Name="VrstaDopisa" Type="int" />
+        </EntityType>
+        <EntityType Name="Status_Zadatka">
+          <Key>
+            <PropertyRef Name="ID_SZ" />
+          </Key>
+          <Property Name="ID_SZ" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status_Zadatka" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatusProjekta">
+          <Key>
+            <PropertyRef Name="IDStatusProj" />
+          </Key>
+          <Property Name="IDStatusProj" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivStatProj" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatusSuradnja">
+          <Key>
+            <PropertyRef Name="IDStatusSuradnja" />
+          </Key>
+          <Property Name="IDStatusSuradnja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusNaziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Suradnja">
+          <Key>
+            <PropertyRef Name="IDSuradnja" />
+          </Key>
+          <Property Name="IDSuradnja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KomentarSuradnja" Type="nvarchar(max)" />
+          <Property Name="OdgovoranClan" Type="int" Nullable="false" />
+          <Property Name="TipSuradnja" Type="int" />
+          <Property Name="StatusSuradnja" Type="int" />
+          <Property Name="KontaktKompanije" Type="int" />
+          <Property Name="IDProjekt" Type="int" Nullable="false" />
+          <Property Name="IDKompanija" Type="int" Nullable="false" />
+          <Property Name="DatumZadnjegKontakta" Type="datetime" Nullable="false" />
+          <Property Name="FinancijskaVrijednost" Type="int" />
+          <Property Name="MaterijalnaVrijednost" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipSuradnje">
+          <Key>
+            <PropertyRef Name="IDTipSuradnja" />
+          </Key>
+          <Property Name="IDTipSuradnja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipSuradnja" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UlogaUSustavu">
+          <Key>
+            <PropertyRef Name="IDUUS" />
+          </Key>
+          <Property Name="IDUUS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivUloge" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Uploaded_File">
+          <Key>
+            <PropertyRef Name="ID_File" />
+          </Key>
+          <Property Name="ID_File" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Size" Type="int" Nullable="false" />
+          <Property Name="Content_Type" Type="nvarchar" MaxLength="200" />
+          <Property Name="File_Extension" Type="nvarchar" MaxLength="20" />
+          <Property Name="File_Content" Type="varbinary(max)" />
+          <Property Name="Upload_Date" Type="datetime" />
+          <Property Name="Clan" Type="int" />
+          <Property Name="Projekt" Type="int" />
+          <Property Name="SIC" Type="int" />
+          <Property Name="Kompanija" Type="int" />
+          <Property Name="Kontakt" Type="int" />
+          <Property Name="Suradnja" Type="int" />
+        </EntityType>
+        <EntityType Name="Zadatak_Projekta">
+          <Key>
+            <PropertyRef Name="ID_Zadatak" />
+          </Key>
+          <Property Name="ID_Zadatak" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Projekt" Type="int" />
+        </EntityType>
+        <Association Name="FK__ClanFROdb__Aktiv__18B6AB08">
+          <End Role="AktivanClan" Type="Self.AktivanClan" Multiplicity="1" />
+          <End Role="ClanFROdbora" Type="Self.ClanFROdbora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AktivanClan">
+              <PropertyRef Name="IDAktivan" />
+            </Principal>
+            <Dependent Role="ClanFROdbora">
+              <PropertyRef Name="Aktivan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClanFROdb__Modul__16CE6296">
+          <End Role="ModuliFPZ" Type="Self.ModuliFPZ" Multiplicity="0..1" />
+          <End Role="ClanFROdbora" Type="Self.ClanFROdbora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuliFPZ">
+              <PropertyRef Name="IDModula" />
+            </Principal>
+            <Dependent Role="ClanFROdbora">
+              <PropertyRef Name="ModulClana" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClanFROdb__Uloga__17C286CF">
+          <End Role="UlogaUSustavu" Type="Self.UlogaUSustavu" Multiplicity="1" />
+          <End Role="ClanFROdbora" Type="Self.ClanFROdbora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UlogaUSustavu">
+              <PropertyRef Name="IDUUS" />
+            </Principal>
+            <Dependent Role="ClanFROdbora">
+              <PropertyRef Name="Uloga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KontaktKo__IDKom__0B5CAFEA">
+          <End Role="Kompanija" Type="Self.Kompanija" Multiplicity="1" />
+          <End Role="KontaktKompanije" Type="Self.KontaktKompanije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kompanija">
+              <PropertyRef Name="IDKompanija" />
+            </Principal>
+            <Dependent Role="KontaktKompanije">
+              <PropertyRef Name="IDKompanijaKontakta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projekt__Priorit__05A3D694">
+          <End Role="PrioritetProjekta" Type="Self.PrioritetProjekta" Multiplicity="1" />
+          <End Role="Projekt" Type="Self.Projekt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrioritetProjekta">
+              <PropertyRef Name="IDPrior" />
+            </Principal>
+            <Dependent Role="Projekt">
+              <PropertyRef Name="PrioritetProjekta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projekt__StatusP__04AFB25B">
+          <End Role="StatusProjekta" Type="Self.StatusProjekta" Multiplicity="1" />
+          <End Role="Projekt" Type="Self.Projekt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusProjekta">
+              <PropertyRef Name="IDStatusProj" />
+            </Principal>
+            <Dependent Role="Projekt">
+              <PropertyRef Name="StatusProjekta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SharingIs__IDKom__28ED12D1">
+          <End Role="Kompanija" Type="Self.Kompanija" Multiplicity="0..1" />
+          <End Role="SharingIsCaring" Type="Self.SharingIsCaring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kompanija">
+              <PropertyRef Name="IDKompanija" />
+            </Principal>
+            <Dependent Role="SharingIsCaring">
+              <PropertyRef Name="IDKompanija" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SharingIs__Konta__27F8EE98">
+          <End Role="KontaktKompanije" Type="Self.KontaktKompanije" Multiplicity="0..1" />
+          <End Role="SharingIsCaring" Type="Self.SharingIsCaring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KontaktKompanije">
+              <PropertyRef Name="IDKontakt" />
+            </Principal>
+            <Dependent Role="SharingIsCaring">
+              <PropertyRef Name="KontaktKompanije" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SharingIs__OdgCl__2704CA5F">
+          <End Role="ClanFROdbora" Type="Self.ClanFROdbora" Multiplicity="1" />
+          <End Role="SharingIsCaring" Type="Self.SharingIsCaring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClanFROdbora">
+              <PropertyRef Name="IDClan" />
+            </Principal>
+            <Dependent Role="SharingIsCaring">
+              <PropertyRef Name="OdgClan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SharingIs__Vrsta__29E1370A">
+          <End Role="TipSuradnje" Type="Self.TipSuradnje" Multiplicity="0..1" />
+          <End Role="SharingIsCaring" Type="Self.SharingIsCaring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipSuradnje">
+              <PropertyRef Name="IDTipSuradnja" />
+            </Principal>
+            <Dependent Role="SharingIsCaring">
+              <PropertyRef Name="VrstaDopisa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suradnja__IDKomp__22401542">
+          <End Role="Kompanija" Type="Self.Kompanija" Multiplicity="1" />
+          <End Role="Suradnja" Type="Self.Suradnja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kompanija">
+              <PropertyRef Name="IDKompanija" />
+            </Principal>
+            <Dependent Role="Suradnja">
+              <PropertyRef Name="IDKompanija" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suradnja__IDProj__214BF109">
+          <End Role="Projekt" Type="Self.Projekt" Multiplicity="1" />
+          <End Role="Suradnja" Type="Self.Suradnja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projekt">
+              <PropertyRef Name="IDProjekt" />
+            </Principal>
+            <Dependent Role="Suradnja">
+              <PropertyRef Name="IDProjekt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suradnja__Kontak__2057CCD0">
+          <End Role="KontaktKompanije" Type="Self.KontaktKompanije" Multiplicity="0..1" />
+          <End Role="Suradnja" Type="Self.Suradnja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KontaktKompanije">
+              <PropertyRef Name="IDKontakt" />
+            </Principal>
+            <Dependent Role="Suradnja">
+              <PropertyRef Name="KontaktKompanije" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suradnja__Odgovo__1D7B6025">
+          <End Role="ClanFROdbora" Type="Self.ClanFROdbora" Multiplicity="1" />
+          <End Role="Suradnja" Type="Self.Suradnja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClanFROdbora">
+              <PropertyRef Name="IDClan" />
+            </Principal>
+            <Dependent Role="Suradnja">
+              <PropertyRef Name="OdgovoranClan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suradnja__Status__1F63A897">
+          <End Role="StatusSuradnja" Type="Self.StatusSuradnja" Multiplicity="0..1" />
+          <End Role="Suradnja" Type="Self.Suradnja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusSuradnja">
+              <PropertyRef Name="IDStatusSuradnja" />
+            </Principal>
+            <Dependent Role="Suradnja">
+              <PropertyRef Name="StatusSuradnja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suradnja__TipSur__1E6F845E">
+          <End Role="TipSuradnje" Type="Self.TipSuradnje" Multiplicity="0..1" />
+          <End Role="Suradnja" Type="Self.Suradnja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipSuradnje">
+              <PropertyRef Name="IDTipSuradnja" />
+            </Principal>
+            <Dependent Role="Suradnja">
+              <PropertyRef Name="TipSuradnja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uploaded___Kompa__61316BF4">
+          <End Role="Kompanija" Type="Self.Kompanija" Multiplicity="0..1" />
+          <End Role="Uploaded_File" Type="Self.Uploaded_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kompanija">
+              <PropertyRef Name="IDKompanija" />
+            </Principal>
+            <Dependent Role="Uploaded_File">
+              <PropertyRef Name="Kompanija" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uploaded___Konta__6225902D">
+          <End Role="KontaktKompanije" Type="Self.KontaktKompanije" Multiplicity="0..1" />
+          <End Role="Uploaded_File" Type="Self.Uploaded_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KontaktKompanije">
+              <PropertyRef Name="IDKontakt" />
+            </Principal>
+            <Dependent Role="Uploaded_File">
+              <PropertyRef Name="Kontakt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uploaded___Proje__5F492382">
+          <End Role="Projekt" Type="Self.Projekt" Multiplicity="0..1" />
+          <End Role="Uploaded_File" Type="Self.Uploaded_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projekt">
+              <PropertyRef Name="IDProjekt" />
+            </Principal>
+            <Dependent Role="Uploaded_File">
+              <PropertyRef Name="Projekt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uploaded___Surad__6319B466">
+          <End Role="Suradnja" Type="Self.Suradnja" Multiplicity="0..1" />
+          <End Role="Uploaded_File" Type="Self.Uploaded_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suradnja">
+              <PropertyRef Name="IDSuradnja" />
+            </Principal>
+            <Dependent Role="Uploaded_File">
+              <PropertyRef Name="Suradnja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uploaded_F__Clan__5E54FF49">
+          <End Role="ClanFROdbora" Type="Self.ClanFROdbora" Multiplicity="0..1" />
+          <End Role="Uploaded_File" Type="Self.Uploaded_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClanFROdbora">
+              <PropertyRef Name="IDClan" />
+            </Principal>
+            <Dependent Role="Uploaded_File">
+              <PropertyRef Name="Clan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uploaded_Fi__SIC__603D47BB">
+          <End Role="SharingIsCaring" Type="Self.SharingIsCaring" Multiplicity="0..1" />
+          <End Role="Uploaded_File" Type="Self.Uploaded_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SharingIsCaring">
+              <PropertyRef Name="IDSiC" />
+            </Principal>
+            <Dependent Role="Uploaded_File">
+              <PropertyRef Name="SIC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zadatak_P__Proje__6E8B6712">
+          <End Role="Projekt" Type="Self.Projekt" Multiplicity="0..1" />
+          <End Role="Zadatak_Projekta" Type="Self.Zadatak_Projekta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projekt">
+              <PropertyRef Name="IDProjekt" />
+            </Principal>
+            <Dependent Role="Zadatak_Projekta">
+              <PropertyRef Name="Projekt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zadatak_P__Statu__6D9742D9">
+          <End Role="Status_Zadatka" Type="Self.Status_Zadatka" Multiplicity="1" />
+          <End Role="Zadatak_Projekta" Type="Self.Zadatak_Projekta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Zadatka">
+              <PropertyRef Name="ID_SZ" />
+            </Principal>
+            <Dependent Role="Zadatak_Projekta">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="AktivanClan" EntityType="Self.AktivanClan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClanFROdbora" EntityType="Self.ClanFROdbora" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kompanija" EntityType="Self.Kompanija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KontaktKompanije" EntityType="Self.KontaktKompanije" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuliFPZ" EntityType="Self.ModuliFPZ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrioritetProjekta" EntityType="Self.PrioritetProjekta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projekt" EntityType="Self.Projekt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SharingIsCaring" EntityType="Self.SharingIsCaring" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status_Zadatka" EntityType="Self.Status_Zadatka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusProjekta" EntityType="Self.StatusProjekta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusSuradnja" EntityType="Self.StatusSuradnja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suradnja" EntityType="Self.Suradnja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipSuradnje" EntityType="Self.TipSuradnje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UlogaUSustavu" EntityType="Self.UlogaUSustavu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uploaded_File" EntityType="Self.Uploaded_File" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zadatak_Projekta" EntityType="Self.Zadatak_Projekta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ClanFROdb__Aktiv__18B6AB08" Association="Self.FK__ClanFROdb__Aktiv__18B6AB08">
+            <End Role="AktivanClan" EntitySet="AktivanClan" />
+            <End Role="ClanFROdbora" EntitySet="ClanFROdbora" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClanFROdb__Modul__16CE6296" Association="Self.FK__ClanFROdb__Modul__16CE6296">
+            <End Role="ModuliFPZ" EntitySet="ModuliFPZ" />
+            <End Role="ClanFROdbora" EntitySet="ClanFROdbora" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClanFROdb__Uloga__17C286CF" Association="Self.FK__ClanFROdb__Uloga__17C286CF">
+            <End Role="UlogaUSustavu" EntitySet="UlogaUSustavu" />
+            <End Role="ClanFROdbora" EntitySet="ClanFROdbora" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KontaktKo__IDKom__0B5CAFEA" Association="Self.FK__KontaktKo__IDKom__0B5CAFEA">
+            <End Role="Kompanija" EntitySet="Kompanija" />
+            <End Role="KontaktKompanije" EntitySet="KontaktKompanije" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projekt__Priorit__05A3D694" Association="Self.FK__Projekt__Priorit__05A3D694">
+            <End Role="PrioritetProjekta" EntitySet="PrioritetProjekta" />
+            <End Role="Projekt" EntitySet="Projekt" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projekt__StatusP__04AFB25B" Association="Self.FK__Projekt__StatusP__04AFB25B">
+            <End Role="StatusProjekta" EntitySet="StatusProjekta" />
+            <End Role="Projekt" EntitySet="Projekt" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SharingIs__IDKom__28ED12D1" Association="Self.FK__SharingIs__IDKom__28ED12D1">
+            <End Role="Kompanija" EntitySet="Kompanija" />
+            <End Role="SharingIsCaring" EntitySet="SharingIsCaring" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SharingIs__Konta__27F8EE98" Association="Self.FK__SharingIs__Konta__27F8EE98">
+            <End Role="KontaktKompanije" EntitySet="KontaktKompanije" />
+            <End Role="SharingIsCaring" EntitySet="SharingIsCaring" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SharingIs__OdgCl__2704CA5F" Association="Self.FK__SharingIs__OdgCl__2704CA5F">
+            <End Role="ClanFROdbora" EntitySet="ClanFROdbora" />
+            <End Role="SharingIsCaring" EntitySet="SharingIsCaring" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SharingIs__Vrsta__29E1370A" Association="Self.FK__SharingIs__Vrsta__29E1370A">
+            <End Role="TipSuradnje" EntitySet="TipSuradnje" />
+            <End Role="SharingIsCaring" EntitySet="SharingIsCaring" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suradnja__IDKomp__22401542" Association="Self.FK__Suradnja__IDKomp__22401542">
+            <End Role="Kompanija" EntitySet="Kompanija" />
+            <End Role="Suradnja" EntitySet="Suradnja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suradnja__IDProj__214BF109" Association="Self.FK__Suradnja__IDProj__214BF109">
+            <End Role="Projekt" EntitySet="Projekt" />
+            <End Role="Suradnja" EntitySet="Suradnja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suradnja__Kontak__2057CCD0" Association="Self.FK__Suradnja__Kontak__2057CCD0">
+            <End Role="KontaktKompanije" EntitySet="KontaktKompanije" />
+            <End Role="Suradnja" EntitySet="Suradnja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suradnja__Odgovo__1D7B6025" Association="Self.FK__Suradnja__Odgovo__1D7B6025">
+            <End Role="ClanFROdbora" EntitySet="ClanFROdbora" />
+            <End Role="Suradnja" EntitySet="Suradnja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suradnja__Status__1F63A897" Association="Self.FK__Suradnja__Status__1F63A897">
+            <End Role="StatusSuradnja" EntitySet="StatusSuradnja" />
+            <End Role="Suradnja" EntitySet="Suradnja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suradnja__TipSur__1E6F845E" Association="Self.FK__Suradnja__TipSur__1E6F845E">
+            <End Role="TipSuradnje" EntitySet="TipSuradnje" />
+            <End Role="Suradnja" EntitySet="Suradnja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uploaded___Kompa__61316BF4" Association="Self.FK__Uploaded___Kompa__61316BF4">
+            <End Role="Kompanija" EntitySet="Kompanija" />
+            <End Role="Uploaded_File" EntitySet="Uploaded_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uploaded___Konta__6225902D" Association="Self.FK__Uploaded___Konta__6225902D">
+            <End Role="KontaktKompanije" EntitySet="KontaktKompanije" />
+            <End Role="Uploaded_File" EntitySet="Uploaded_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uploaded___Proje__5F492382" Association="Self.FK__Uploaded___Proje__5F492382">
+            <End Role="Projekt" EntitySet="Projekt" />
+            <End Role="Uploaded_File" EntitySet="Uploaded_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uploaded___Surad__6319B466" Association="Self.FK__Uploaded___Surad__6319B466">
+            <End Role="Suradnja" EntitySet="Suradnja" />
+            <End Role="Uploaded_File" EntitySet="Uploaded_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uploaded_F__Clan__5E54FF49" Association="Self.FK__Uploaded_F__Clan__5E54FF49">
+            <End Role="ClanFROdbora" EntitySet="ClanFROdbora" />
+            <End Role="Uploaded_File" EntitySet="Uploaded_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uploaded_Fi__SIC__603D47BB" Association="Self.FK__Uploaded_Fi__SIC__603D47BB">
+            <End Role="SharingIsCaring" EntitySet="SharingIsCaring" />
+            <End Role="Uploaded_File" EntitySet="Uploaded_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zadatak_P__Proje__6E8B6712" Association="Self.FK__Zadatak_P__Proje__6E8B6712">
+            <End Role="Projekt" EntitySet="Projekt" />
+            <End Role="Zadatak_Projekta" EntitySet="Zadatak_Projekta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zadatak_P__Statu__6D9742D9" Association="Self.FK__Zadatak_P__Statu__6D9742D9">
+            <End Role="Status_Zadatka" EntitySet="Status_Zadatka" />
+            <End Role="Zadatak_Projekta" EntitySet="Zadatak_Projekta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CDB_Context" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Models.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Models.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="AktivanClans" EntityType="Models.AktivanClan" />
+          <EntitySet Name="ClanFROdboras" EntityType="Models.ClanFROdbora" />
+          <EntitySet Name="Kompanijas" EntityType="Models.Kompanija" />
+          <EntitySet Name="KontaktKompanijes" EntityType="Models.KontaktKompanije" />
+          <EntitySet Name="ModuliFPZs" EntityType="Models.ModuliFPZ" />
+          <EntitySet Name="PrioritetProjektas" EntityType="Models.PrioritetProjekta" />
+          <EntitySet Name="Projekts" EntityType="Models.Projekt" />
+          <EntitySet Name="SharingIsCarings" EntityType="Models.SharingIsCaring" />
+          <EntitySet Name="Status_Zadatka" EntityType="Models.Status_Zadatka" />
+          <EntitySet Name="StatusProjektas" EntityType="Models.StatusProjekta" />
+          <EntitySet Name="StatusSuradnjas" EntityType="Models.StatusSuradnja" />
+          <EntitySet Name="Suradnjas" EntityType="Models.Suradnja" />
+          <EntitySet Name="sysdiagrams" EntityType="Models.sysdiagram" />
+          <EntitySet Name="TipSuradnjes" EntityType="Models.TipSuradnje" />
+          <EntitySet Name="UlogaUSustavus" EntityType="Models.UlogaUSustavu" />
+          <EntitySet Name="Uploaded_File" EntityType="Models.Uploaded_File" />
+          <EntitySet Name="Zadatak_Projekta" EntityType="Models.Zadatak_Projekta" />
+          <AssociationSet Name="FK__ClanFROdb__Aktiv__18B6AB08" Association="Models.FK__ClanFROdb__Aktiv__18B6AB08">
+            <End Role="AktivanClan" EntitySet="AktivanClans" />
+            <End Role="ClanFROdbora" EntitySet="ClanFROdboras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClanFROdb__Modul__16CE6296" Association="Models.FK__ClanFROdb__Modul__16CE6296">
+            <End Role="ModuliFPZ" EntitySet="ModuliFPZs" />
+            <End Role="ClanFROdbora" EntitySet="ClanFROdboras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClanFROdb__Uloga__17C286CF" Association="Models.FK__ClanFROdb__Uloga__17C286CF">
+            <End Role="UlogaUSustavu" EntitySet="UlogaUSustavus" />
+            <End Role="ClanFROdbora" EntitySet="ClanFROdboras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SharingIs__OdgCl__2704CA5F" Association="Models.FK__SharingIs__OdgCl__2704CA5F">
+            <End Role="ClanFROdbora" EntitySet="ClanFROdboras" />
+            <End Role="SharingIsCaring" EntitySet="SharingIsCarings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suradnja__Odgovo__1D7B6025" Association="Models.FK__Suradnja__Odgovo__1D7B6025">
+            <End Role="ClanFROdbora" EntitySet="ClanFROdboras" />
+            <End Role="Suradnja" EntitySet="Suradnjas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uploaded_F__Clan__5E54FF49" Association="Models.FK__Uploaded_F__Clan__5E54FF49">
+            <End Role="ClanFROdbora" EntitySet="ClanFROdboras" />
+            <End Role="Uploaded_File" EntitySet="Uploaded_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KontaktKo__IDKom__0B5CAFEA" Association="Models.FK__KontaktKo__IDKom__0B5CAFEA">
+            <End Role="Kompanija" EntitySet="Kompanijas" />
+            <End Role="KontaktKompanije" EntitySet="KontaktKompanijes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SharingIs__IDKom__28ED12D1" Association="Models.FK__SharingIs__IDKom__28ED12D1">
+            <End Role="Kompanija" EntitySet="Kompanijas" />
+            <End Role="SharingIsCaring" EntitySet="SharingIsCarings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suradnja__IDKomp__22401542" Association="Models.FK__Suradnja__IDKomp__22401542">
+            <End Role="Kompanija" EntitySet="Kompanijas" />
+            <End Role="Suradnja" EntitySet="Suradnjas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uploaded___Kompa__61316BF4" Association="Models.FK__Uploaded___Kompa__61316BF4">
+            <End Role="Kompanija" EntitySet="Kompanijas" />
+            <End Role="Uploaded_File" EntitySet="Uploaded_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SharingIs__Konta__27F8EE98" Association="Models.FK__SharingIs__Konta__27F8EE98">
+            <End Role="KontaktKompanije" EntitySet="KontaktKompanijes" />
+            <End Role="SharingIsCaring" EntitySet="SharingIsCarings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suradnja__Kontak__2057CCD0" Association="Models.FK__Suradnja__Kontak__2057CCD0">
+            <End Role="KontaktKompanije" EntitySet="KontaktKompanijes" />
+            <End Role="Suradnja" EntitySet="Suradnjas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uploaded___Konta__6225902D" Association="Models.FK__Uploaded___Konta__6225902D">
+            <End Role="KontaktKompanije" EntitySet="KontaktKompanijes" />
+            <End Role="Uploaded_File" EntitySet="Uploaded_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projekt__Priorit__05A3D694" Association="Models.FK__Projekt__Priorit__05A3D694">
+            <End Role="PrioritetProjekta" EntitySet="PrioritetProjektas" />
+            <End Role="Projekt" EntitySet="Projekts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projekt__StatusP__04AFB25B" Association="Models.FK__Projekt__StatusP__04AFB25B">
+            <End Role="StatusProjekta" EntitySet="StatusProjektas" />
+            <End Role="Projekt" EntitySet="Projekts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suradnja__IDProj__214BF109" Association="Models.FK__Suradnja__IDProj__214BF109">
+            <End Role="Projekt" EntitySet="Projekts" />
+            <End Role="Suradnja" EntitySet="Suradnjas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uploaded___Proje__5F492382" Association="Models.FK__Uploaded___Proje__5F492382">
+            <End Role="Projekt" EntitySet="Projekts" />
+            <End Role="Uploaded_File" EntitySet="Uploaded_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zadatak_P__Proje__6E8B6712" Association="Models.FK__Zadatak_P__Proje__6E8B6712">
+            <End Role="Projekt" EntitySet="Projekts" />
+            <End Role="Zadatak_Projekta" EntitySet="Zadatak_Projekta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SharingIs__Vrsta__29E1370A" Association="Models.FK__SharingIs__Vrsta__29E1370A">
+            <End Role="TipSuradnje" EntitySet="TipSuradnjes" />
+            <End Role="SharingIsCaring" EntitySet="SharingIsCarings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uploaded_Fi__SIC__603D47BB" Association="Models.FK__Uploaded_Fi__SIC__603D47BB">
+            <End Role="SharingIsCaring" EntitySet="SharingIsCarings" />
+            <End Role="Uploaded_File" EntitySet="Uploaded_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zadatak_P__Statu__6D9742D9" Association="Models.FK__Zadatak_P__Statu__6D9742D9">
+            <End Role="Status_Zadatka" EntitySet="Status_Zadatka" />
+            <End Role="Zadatak_Projekta" EntitySet="Zadatak_Projekta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suradnja__Status__1F63A897" Association="Models.FK__Suradnja__Status__1F63A897">
+            <End Role="StatusSuradnja" EntitySet="StatusSuradnjas" />
+            <End Role="Suradnja" EntitySet="Suradnjas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suradnja__TipSur__1E6F845E" Association="Models.FK__Suradnja__TipSur__1E6F845E">
+            <End Role="TipSuradnje" EntitySet="TipSuradnjes" />
+            <End Role="Suradnja" EntitySet="Suradnjas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uploaded___Surad__6319B466" Association="Models.FK__Uploaded___Surad__6319B466">
+            <End Role="Suradnja" EntitySet="Suradnjas" />
+            <End Role="Uploaded_File" EntitySet="Uploaded_File" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition1" ReturnType="Collection(Models.sp_helpdiagramdefinition1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams1" ReturnType="Collection(Models.sp_helpdiagrams1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams1" />
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="AktivanClan">
+          <Key>
+            <PropertyRef Name="IDAktivan" />
+          </Key>
+          <Property Name="IDAktivan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Aktivan" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClanFROdboras" Relationship="Models.FK__ClanFROdb__Aktiv__18B6AB08" FromRole="AktivanClan" ToRole="ClanFROdbora" />
+        </EntityType>
+        <EntityType Name="ClanFROdbora">
+          <Key>
+            <PropertyRef Name="IDClan" />
+          </Key>
+          <Property Name="IDClan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImeClana" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PrezimeClana" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailClana" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobitelKontakt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModulClana" Type="Int32" />
+          <Property Name="KorisnickoImeClana" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LozinkaClana" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Uloga" Type="Int32" Nullable="false" />
+          <Property Name="Aktivan" Type="Int32" Nullable="false" />
+          <Property Name="ImePrezime" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AktivanClan" Relationship="Models.FK__ClanFROdb__Aktiv__18B6AB08" FromRole="ClanFROdbora" ToRole="AktivanClan" />
+          <NavigationProperty Name="ModuliFPZ" Relationship="Models.FK__ClanFROdb__Modul__16CE6296" FromRole="ClanFROdbora" ToRole="ModuliFPZ" />
+          <NavigationProperty Name="UlogaUSustavu" Relationship="Models.FK__ClanFROdb__Uloga__17C286CF" FromRole="ClanFROdbora" ToRole="UlogaUSustavu" />
+          <NavigationProperty Name="SharingIsCarings" Relationship="Models.FK__SharingIs__OdgCl__2704CA5F" FromRole="ClanFROdbora" ToRole="SharingIsCaring" />
+          <NavigationProperty Name="Suradnjas" Relationship="Models.FK__Suradnja__Odgovo__1D7B6025" FromRole="ClanFROdbora" ToRole="Suradnja" />
+          <NavigationProperty Name="Uploaded_File" Relationship="Models.FK__Uploaded_F__Clan__5E54FF49" FromRole="ClanFROdbora" ToRole="Uploaded_File" />
+        </EntityType>
+        <EntityType Name="Kompanija">
+          <Key>
+            <PropertyRef Name="IDKompanija" />
+          </Key>
+          <Property Name="IDKompanija" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivKompanija" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="OpisKompanija" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdresaKompanija" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PoštanskiBrojKompanija" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DrzavaKompanija" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GradKompanija" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TelefonKompanija" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KontaktKompanijes" Relationship="Models.FK__KontaktKo__IDKom__0B5CAFEA" FromRole="Kompanija" ToRole="KontaktKompanije" />
+          <NavigationProperty Name="SharingIsCarings" Relationship="Models.FK__SharingIs__IDKom__28ED12D1" FromRole="Kompanija" ToRole="SharingIsCaring" />
+          <NavigationProperty Name="Suradnjas" Relationship="Models.FK__Suradnja__IDKomp__22401542" FromRole="Kompanija" ToRole="Suradnja" />
+          <NavigationProperty Name="Uploaded_File" Relationship="Models.FK__Uploaded___Kompa__61316BF4" FromRole="Kompanija" ToRole="Uploaded_File" />
+        </EntityType>
+        <EntityType Name="KontaktKompanije">
+          <Key>
+            <PropertyRef Name="IDKontakt" />
+          </Key>
+          <Property Name="IDKontakt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImeKontakt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PrezimeKontakt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailKontakt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TelefonKontakt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobitelKontakt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FunkcijaUKompaniji" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OpisKontakta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ZaposlenValidan" Type="Boolean" Nullable="false" />
+          <Property Name="IDKompanijaKontakta" Type="Int32" Nullable="false" />
+          <Property Name="ImePrezimeKontakta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kompanija" Relationship="Models.FK__KontaktKo__IDKom__0B5CAFEA" FromRole="KontaktKompanije" ToRole="Kompanija" />
+          <NavigationProperty Name="SharingIsCarings" Relationship="Models.FK__SharingIs__Konta__27F8EE98" FromRole="KontaktKompanije" ToRole="SharingIsCaring" />
+          <NavigationProperty Name="Suradnjas" Relationship="Models.FK__Suradnja__Kontak__2057CCD0" FromRole="KontaktKompanije" ToRole="Suradnja" />
+          <NavigationProperty Name="Uploaded_File" Relationship="Models.FK__Uploaded___Konta__6225902D" FromRole="KontaktKompanije" ToRole="Uploaded_File" />
+        </EntityType>
+        <EntityType Name="ModuliFPZ">
+          <Key>
+            <PropertyRef Name="IDModula" />
+          </Key>
+          <Property Name="IDModula" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivModula" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClanFROdboras" Relationship="Models.FK__ClanFROdb__Modul__16CE6296" FromRole="ModuliFPZ" ToRole="ClanFROdbora" />
+        </EntityType>
+        <EntityType Name="PrioritetProjekta">
+          <Key>
+            <PropertyRef Name="IDPrior" />
+          </Key>
+          <Property Name="IDPrior" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RazinaPrioriteta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Projekts" Relationship="Models.FK__Projekt__Priorit__05A3D694" FromRole="PrioritetProjekta" ToRole="Projekt" />
+        </EntityType>
+        <EntityType Name="Projekt">
+          <Key>
+            <PropertyRef Name="IDProjekt" />
+          </Key>
+          <Property Name="IDProjekt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivProjekt" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="OpisProjekt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebAdresaProjekta" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="GodinaProjekt" Type="DateTime" Precision="3" />
+          <Property Name="CiljFRFinancije" Type="Int32" />
+          <Property Name="CiljFRMaterijali" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StatusProjekta" Type="Int32" Nullable="false" />
+          <Property Name="PrioritetProjekta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PrioritetProjekta1" Relationship="Models.FK__Projekt__Priorit__05A3D694" FromRole="Projekt" ToRole="PrioritetProjekta" />
+          <NavigationProperty Name="StatusProjekta1" Relationship="Models.FK__Projekt__StatusP__04AFB25B" FromRole="Projekt" ToRole="StatusProjekta" />
+          <NavigationProperty Name="Suradnjas" Relationship="Models.FK__Suradnja__IDProj__214BF109" FromRole="Projekt" ToRole="Suradnja" />
+          <NavigationProperty Name="Uploaded_File" Relationship="Models.FK__Uploaded___Proje__5F492382" FromRole="Projekt" ToRole="Uploaded_File" />
+          <NavigationProperty Name="Zadatak_Projekta" Relationship="Models.FK__Zadatak_P__Proje__6E8B6712" FromRole="Projekt" ToRole="Zadatak_Projekta" />
+        </EntityType>
+        <EntityType Name="SharingIsCaring">
+          <Key>
+            <PropertyRef Name="IDSiC" />
+          </Key>
+          <Property Name="IDSiC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatumIzmjene" Type="DateTime" Precision="3" />
+          <Property Name="PrimjerDopisa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OsobniKomentarDopisa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OdgClan" Type="Int32" Nullable="false" />
+          <Property Name="KontaktKompanije" Type="Int32" />
+          <Property Name="IDKompanija" Type="Int32" />
+          <Property Name="VrstaDopisa" Type="Int32" />
+          <NavigationProperty Name="ClanFROdbora" Relationship="Models.FK__SharingIs__OdgCl__2704CA5F" FromRole="SharingIsCaring" ToRole="ClanFROdbora" />
+          <NavigationProperty Name="Kompanija" Relationship="Models.FK__SharingIs__IDKom__28ED12D1" FromRole="SharingIsCaring" ToRole="Kompanija" />
+          <NavigationProperty Name="KontaktKompanije1" Relationship="Models.FK__SharingIs__Konta__27F8EE98" FromRole="SharingIsCaring" ToRole="KontaktKompanije" />
+          <NavigationProperty Name="TipSuradnje" Relationship="Models.FK__SharingIs__Vrsta__29E1370A" FromRole="SharingIsCaring" ToRole="TipSuradnje" />
+          <NavigationProperty Name="Uploaded_File" Relationship="Models.FK__Uploaded_Fi__SIC__603D47BB" FromRole="SharingIsCaring" ToRole="Uploaded_File" />
+        </EntityType>
+        <EntityType Name="Status_Zadatka">
+          <Key>
+            <PropertyRef Name="ID_SZ" />
+          </Key>
+          <Property Name="ID_SZ" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status_Zadatka1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Zadatak_Projekta" Relationship="Models.FK__Zadatak_P__Statu__6D9742D9" FromRole="Status_Zadatka" ToRole="Zadatak_Projekta" />
+        </EntityType>
+        <EntityType Name="StatusProjekta">
+          <Key>
+            <PropertyRef Name="IDStatusProj" />
+          </Key>
+          <Property Name="IDStatusProj" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivStatProj" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Projekts" Relationship="Models.FK__Projekt__StatusP__04AFB25B" FromRole="StatusProjekta" ToRole="Projekt" />
+        </EntityType>
+        <EntityType Name="StatusSuradnja">
+          <Key>
+            <PropertyRef Name="IDStatusSuradnja" />
+          </Key>
+          <Property Name="IDStatusSuradnja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusNaziv" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Suradnjas" Relationship="Models.FK__Suradnja__Status__1F63A897" FromRole="StatusSuradnja" ToRole="Suradnja" />
+        </EntityType>
+        <EntityType Name="Suradnja">
+          <Key>
+            <PropertyRef Name="IDSuradnja" />
+          </Key>
+          <Property Name="IDSuradnja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KomentarSuradnja" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OdgovoranClan" Type="Int32" Nullable="false" />
+          <Property Name="TipSuradnja" Type="Int32" />
+          <Property Name="StatusSuradnja" Type="Int32" />
+          <Property Name="KontaktKompanije" Type="Int32" />
+          <Property Name="IDProjekt" Type="Int32" Nullable="false" />
+          <Property Name="IDKompanija" Type="Int32" Nullable="false" />
+          <Property Name="DatumZadnjegKontakta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FinancijskaVrijednost" Type="Int32" />
+          <Property Name="MaterijalnaVrijednost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClanFROdbora" Relationship="Models.FK__Suradnja__Odgovo__1D7B6025" FromRole="Suradnja" ToRole="ClanFROdbora" />
+          <NavigationProperty Name="Kompanija" Relationship="Models.FK__Suradnja__IDKomp__22401542" FromRole="Suradnja" ToRole="Kompanija" />
+          <NavigationProperty Name="KontaktKompanije1" Relationship="Models.FK__Suradnja__Kontak__2057CCD0" FromRole="Suradnja" ToRole="KontaktKompanije" />
+          <NavigationProperty Name="Projekt" Relationship="Models.FK__Suradnja__IDProj__214BF109" FromRole="Suradnja" ToRole="Projekt" />
+          <NavigationProperty Name="StatusSuradnja1" Relationship="Models.FK__Suradnja__Status__1F63A897" FromRole="Suradnja" ToRole="StatusSuradnja" />
+          <NavigationProperty Name="TipSuradnje" Relationship="Models.FK__Suradnja__TipSur__1E6F845E" FromRole="Suradnja" ToRole="TipSuradnje" />
+          <NavigationProperty Name="Uploaded_File" Relationship="Models.FK__Uploaded___Surad__6319B466" FromRole="Suradnja" ToRole="Uploaded_File" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipSuradnje">
+          <Key>
+            <PropertyRef Name="IDTipSuradnja" />
+          </Key>
+          <Property Name="IDTipSuradnja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipSuradnja" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SharingIsCarings" Relationship="Models.FK__SharingIs__Vrsta__29E1370A" FromRole="TipSuradnje" ToRole="SharingIsCaring" />
+          <NavigationProperty Name="Suradnjas" Relationship="Models.FK__Suradnja__TipSur__1E6F845E" FromRole="TipSuradnje" ToRole="Suradnja" />
+        </EntityType>
+        <EntityType Name="UlogaUSustavu">
+          <Key>
+            <PropertyRef Name="IDUUS" />
+          </Key>
+          <Property Name="IDUUS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivUloge" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClanFROdboras" Relationship="Models.FK__ClanFROdb__Uloga__17C286CF" FromRole="UlogaUSustavu" ToRole="ClanFROdbora" />
+        </EntityType>
+        <EntityType Name="Uploaded_File">
+          <Key>
+            <PropertyRef Name="ID_File" />
+          </Key>
+          <Property Name="ID_File" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Int32" Nullable="false" />
+          <Property Name="Content_Type" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="File_Extension" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="File_Content" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Upload_Date" Type="DateTime" Precision="3" />
+          <Property Name="Clan" Type="Int32" />
+          <Property Name="Projekt" Type="Int32" />
+          <Property Name="SIC" Type="Int32" />
+          <Property Name="Kompanija" Type="Int32" />
+          <Property Name="Kontakt" Type="Int32" />
+          <Property Name="Suradnja" Type="Int32" />
+          <NavigationProperty Name="ClanFROdbora" Relationship="Models.FK__Uploaded_F__Clan__5E54FF49" FromRole="Uploaded_File" ToRole="ClanFROdbora" />
+          <NavigationProperty Name="Kompanija1" Relationship="Models.FK__Uploaded___Kompa__61316BF4" FromRole="Uploaded_File" ToRole="Kompanija" />
+          <NavigationProperty Name="KontaktKompanije" Relationship="Models.FK__Uploaded___Konta__6225902D" FromRole="Uploaded_File" ToRole="KontaktKompanije" />
+          <NavigationProperty Name="Projekt1" Relationship="Models.FK__Uploaded___Proje__5F492382" FromRole="Uploaded_File" ToRole="Projekt" />
+          <NavigationProperty Name="SharingIsCaring" Relationship="Models.FK__Uploaded_Fi__SIC__603D47BB" FromRole="Uploaded_File" ToRole="SharingIsCaring" />
+          <NavigationProperty Name="Suradnja1" Relationship="Models.FK__Uploaded___Surad__6319B466" FromRole="Uploaded_File" ToRole="Suradnja" />
+        </EntityType>
+        <EntityType Name="Zadatak_Projekta">
+          <Key>
+            <PropertyRef Name="ID_Zadatak" />
+          </Key>
+          <Property Name="ID_Zadatak" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Opis" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Projekt" Type="Int32" />
+          <NavigationProperty Name="Projekt1" Relationship="Models.FK__Zadatak_P__Proje__6E8B6712" FromRole="Zadatak_Projekta" ToRole="Projekt" />
+          <NavigationProperty Name="Status_Zadatka" Relationship="Models.FK__Zadatak_P__Statu__6D9742D9" FromRole="Zadatak_Projekta" ToRole="Status_Zadatka" />
+        </EntityType>
+        <Association Name="FK__ClanFROdb__Aktiv__18B6AB08">
+          <End Type="Models.AktivanClan" Role="AktivanClan" Multiplicity="1" />
+          <End Type="Models.ClanFROdbora" Role="ClanFROdbora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AktivanClan">
+              <PropertyRef Name="IDAktivan" />
+            </Principal>
+            <Dependent Role="ClanFROdbora">
+              <PropertyRef Name="Aktivan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClanFROdb__Modul__16CE6296">
+          <End Type="Models.ModuliFPZ" Role="ModuliFPZ" Multiplicity="0..1" />
+          <End Type="Models.ClanFROdbora" Role="ClanFROdbora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuliFPZ">
+              <PropertyRef Name="IDModula" />
+            </Principal>
+            <Dependent Role="ClanFROdbora">
+              <PropertyRef Name="ModulClana" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClanFROdb__Uloga__17C286CF">
+          <End Type="Models.UlogaUSustavu" Role="UlogaUSustavu" Multiplicity="1" />
+          <End Type="Models.ClanFROdbora" Role="ClanFROdbora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UlogaUSustavu">
+              <PropertyRef Name="IDUUS" />
+            </Principal>
+            <Dependent Role="ClanFROdbora">
+              <PropertyRef Name="Uloga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SharingIs__OdgCl__2704CA5F">
+          <End Type="Models.ClanFROdbora" Role="ClanFROdbora" Multiplicity="1" />
+          <End Type="Models.SharingIsCaring" Role="SharingIsCaring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClanFROdbora">
+              <PropertyRef Name="IDClan" />
+            </Principal>
+            <Dependent Role="SharingIsCaring">
+              <PropertyRef Name="OdgClan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suradnja__Odgovo__1D7B6025">
+          <End Type="Models.ClanFROdbora" Role="ClanFROdbora" Multiplicity="1" />
+          <End Type="Models.Suradnja" Role="Suradnja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClanFROdbora">
+              <PropertyRef Name="IDClan" />
+            </Principal>
+            <Dependent Role="Suradnja">
+              <PropertyRef Name="OdgovoranClan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uploaded_F__Clan__5E54FF49">
+          <End Type="Models.ClanFROdbora" Role="ClanFROdbora" Multiplicity="0..1" />
+          <End Type="Models.Uploaded_File" Role="Uploaded_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClanFROdbora">
+              <PropertyRef Name="IDClan" />
+            </Principal>
+            <Dependent Role="Uploaded_File">
+              <PropertyRef Name="Clan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KontaktKo__IDKom__0B5CAFEA">
+          <End Type="Models.Kompanija" Role="Kompanija" Multiplicity="1" />
+          <End Type="Models.KontaktKompanije" Role="KontaktKompanije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kompanija">
+              <PropertyRef Name="IDKompanija" />
+            </Principal>
+            <Dependent Role="KontaktKompanije">
+              <PropertyRef Name="IDKompanijaKontakta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SharingIs__IDKom__28ED12D1">
+          <End Type="Models.Kompanija" Role="Kompanija" Multiplicity="0..1" />
+          <End Type="Models.SharingIsCaring" Role="SharingIsCaring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kompanija">
+              <PropertyRef Name="IDKompanija" />
+            </Principal>
+            <Dependent Role="SharingIsCaring">
+              <PropertyRef Name="IDKompanija" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suradnja__IDKomp__22401542">
+          <End Type="Models.Kompanija" Role="Kompanija" Multiplicity="1" />
+          <End Type="Models.Suradnja" Role="Suradnja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kompanija">
+              <PropertyRef Name="IDKompanija" />
+            </Principal>
+            <Dependent Role="Suradnja">
+              <PropertyRef Name="IDKompanija" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uploaded___Kompa__61316BF4">
+          <End Type="Models.Kompanija" Role="Kompanija" Multiplicity="0..1" />
+          <End Type="Models.Uploaded_File" Role="Uploaded_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kompanija">
+              <PropertyRef Name="IDKompanija" />
+            </Principal>
+            <Dependent Role="Uploaded_File">
+              <PropertyRef Name="Kompanija" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SharingIs__Konta__27F8EE98">
+          <End Type="Models.KontaktKompanije" Role="KontaktKompanije" Multiplicity="0..1" />
+          <End Type="Models.SharingIsCaring" Role="SharingIsCaring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KontaktKompanije">
+              <PropertyRef Name="IDKontakt" />
+            </Principal>
+            <Dependent Role="SharingIsCaring">
+              <PropertyRef Name="KontaktKompanije" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suradnja__Kontak__2057CCD0">
+          <End Type="Models.KontaktKompanije" Role="KontaktKompanije" Multiplicity="0..1" />
+          <End Type="Models.Suradnja" Role="Suradnja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KontaktKompanije">
+              <PropertyRef Name="IDKontakt" />
+            </Principal>
+            <Dependent Role="Suradnja">
+              <PropertyRef Name="KontaktKompanije" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uploaded___Konta__6225902D">
+          <End Type="Models.KontaktKompanije" Role="KontaktKompanije" Multiplicity="0..1" />
+          <End Type="Models.Uploaded_File" Role="Uploaded_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KontaktKompanije">
+              <PropertyRef Name="IDKontakt" />
+            </Principal>
+            <Dependent Role="Uploaded_File">
+              <PropertyRef Name="Kontakt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projekt__Priorit__05A3D694">
+          <End Type="Models.PrioritetProjekta" Role="PrioritetProjekta" Multiplicity="1" />
+          <End Type="Models.Projekt" Role="Projekt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrioritetProjekta">
+              <PropertyRef Name="IDPrior" />
+            </Principal>
+            <Dependent Role="Projekt">
+              <PropertyRef Name="PrioritetProjekta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projekt__StatusP__04AFB25B">
+          <End Type="Models.StatusProjekta" Role="StatusProjekta" Multiplicity="1" />
+          <End Type="Models.Projekt" Role="Projekt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusProjekta">
+              <PropertyRef Name="IDStatusProj" />
+            </Principal>
+            <Dependent Role="Projekt">
+              <PropertyRef Name="StatusProjekta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suradnja__IDProj__214BF109">
+          <End Type="Models.Projekt" Role="Projekt" Multiplicity="1" />
+          <End Type="Models.Suradnja" Role="Suradnja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projekt">
+              <PropertyRef Name="IDProjekt" />
+            </Principal>
+            <Dependent Role="Suradnja">
+              <PropertyRef Name="IDProjekt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uploaded___Proje__5F492382">
+          <End Type="Models.Projekt" Role="Projekt" Multiplicity="0..1" />
+          <End Type="Models.Uploaded_File" Role="Uploaded_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projekt">
+              <PropertyRef Name="IDProjekt" />
+            </Principal>
+            <Dependent Role="Uploaded_File">
+              <PropertyRef Name="Projekt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zadatak_P__Proje__6E8B6712">
+          <End Type="Models.Projekt" Role="Projekt" Multiplicity="0..1" />
+          <End Type="Models.Zadatak_Projekta" Role="Zadatak_Projekta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projekt">
+              <PropertyRef Name="IDProjekt" />
+            </Principal>
+            <Dependent Role="Zadatak_Projekta">
+              <PropertyRef Name="Projekt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SharingIs__Vrsta__29E1370A">
+          <End Type="Models.TipSuradnje" Role="TipSuradnje" Multiplicity="0..1" />
+          <End Type="Models.SharingIsCaring" Role="SharingIsCaring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipSuradnje">
+              <PropertyRef Name="IDTipSuradnja" />
+            </Principal>
+            <Dependent Role="SharingIsCaring">
+              <PropertyRef Name="VrstaDopisa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uploaded_Fi__SIC__603D47BB">
+          <End Type="Models.SharingIsCaring" Role="SharingIsCaring" Multiplicity="0..1" />
+          <End Type="Models.Uploaded_File" Role="Uploaded_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SharingIsCaring">
+              <PropertyRef Name="IDSiC" />
+            </Principal>
+            <Dependent Role="Uploaded_File">
+              <PropertyRef Name="SIC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zadatak_P__Statu__6D9742D9">
+          <End Type="Models.Status_Zadatka" Role="Status_Zadatka" Multiplicity="1" />
+          <End Type="Models.Zadatak_Projekta" Role="Zadatak_Projekta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Zadatka">
+              <PropertyRef Name="ID_SZ" />
+            </Principal>
+            <Dependent Role="Zadatak_Projekta">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suradnja__Status__1F63A897">
+          <End Type="Models.StatusSuradnja" Role="StatusSuradnja" Multiplicity="0..1" />
+          <End Type="Models.Suradnja" Role="Suradnja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusSuradnja">
+              <PropertyRef Name="IDStatusSuradnja" />
+            </Principal>
+            <Dependent Role="Suradnja">
+              <PropertyRef Name="StatusSuradnja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suradnja__TipSur__1E6F845E">
+          <End Type="Models.TipSuradnje" Role="TipSuradnje" Multiplicity="0..1" />
+          <End Type="Models.Suradnja" Role="Suradnja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipSuradnje">
+              <PropertyRef Name="IDTipSuradnja" />
+            </Principal>
+            <Dependent Role="Suradnja">
+              <PropertyRef Name="TipSuradnja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uploaded___Surad__6319B466">
+          <End Type="Models.Suradnja" Role="Suradnja" Multiplicity="0..1" />
+          <End Type="Models.Uploaded_File" Role="Uploaded_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suradnja">
+              <PropertyRef Name="IDSuradnja" />
+            </Principal>
+            <Dependent Role="Uploaded_File">
+              <PropertyRef Name="Suradnja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition1_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams1_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="CDB_Context" >
+          <EntitySetMapping Name="AktivanClans">
+            <EntityTypeMapping TypeName="Models.AktivanClan">
+              <MappingFragment StoreEntitySet="AktivanClan">
+                <ScalarProperty Name="Aktivan" ColumnName="Aktivan" />
+                <ScalarProperty Name="IDAktivan" ColumnName="IDAktivan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClanFROdboras">
+            <EntityTypeMapping TypeName="Models.ClanFROdbora">
+              <MappingFragment StoreEntitySet="ClanFROdbora">
+                <ScalarProperty Name="ImePrezime" ColumnName="ImePrezime" />
+                <ScalarProperty Name="Aktivan" ColumnName="Aktivan" />
+                <ScalarProperty Name="Uloga" ColumnName="Uloga" />
+                <ScalarProperty Name="LozinkaClana" ColumnName="LozinkaClana" />
+                <ScalarProperty Name="KorisnickoImeClana" ColumnName="KorisnickoImeClana" />
+                <ScalarProperty Name="ModulClana" ColumnName="ModulClana" />
+                <ScalarProperty Name="MobitelKontakt" ColumnName="MobitelKontakt" />
+                <ScalarProperty Name="EmailClana" ColumnName="EmailClana" />
+                <ScalarProperty Name="PrezimeClana" ColumnName="PrezimeClana" />
+                <ScalarProperty Name="ImeClana" ColumnName="ImeClana" />
+                <ScalarProperty Name="IDClan" ColumnName="IDClan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kompanijas">
+            <EntityTypeMapping TypeName="Models.Kompanija">
+              <MappingFragment StoreEntitySet="Kompanija">
+                <ScalarProperty Name="TelefonKompanija" ColumnName="TelefonKompanija" />
+                <ScalarProperty Name="GradKompanija" ColumnName="GradKompanija" />
+                <ScalarProperty Name="DrzavaKompanija" ColumnName="DrzavaKompanija" />
+                <ScalarProperty Name="PoštanskiBrojKompanija" ColumnName="PoštanskiBrojKompanija" />
+                <ScalarProperty Name="AdresaKompanija" ColumnName="AdresaKompanija" />
+                <ScalarProperty Name="OpisKompanija" ColumnName="OpisKompanija" />
+                <ScalarProperty Name="NazivKompanija" ColumnName="NazivKompanija" />
+                <ScalarProperty Name="IDKompanija" ColumnName="IDKompanija" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KontaktKompanijes">
+            <EntityTypeMapping TypeName="Models.KontaktKompanije">
+              <MappingFragment StoreEntitySet="KontaktKompanije">
+                <ScalarProperty Name="ImePrezimeKontakta" ColumnName="ImePrezimeKontakta" />
+                <ScalarProperty Name="IDKompanijaKontakta" ColumnName="IDKompanijaKontakta" />
+                <ScalarProperty Name="ZaposlenValidan" ColumnName="ZaposlenValidan" />
+                <ScalarProperty Name="OpisKontakta" ColumnName="OpisKontakta" />
+                <ScalarProperty Name="FunkcijaUKompaniji" ColumnName="FunkcijaUKompaniji" />
+                <ScalarProperty Name="MobitelKontakt" ColumnName="MobitelKontakt" />
+                <ScalarProperty Name="TelefonKontakt" ColumnName="TelefonKontakt" />
+                <ScalarProperty Name="EmailKontakt" ColumnName="EmailKontakt" />
+                <ScalarProperty Name="PrezimeKontakt" ColumnName="PrezimeKontakt" />
+                <ScalarProperty Name="ImeKontakt" ColumnName="ImeKontakt" />
+                <ScalarProperty Name="IDKontakt" ColumnName="IDKontakt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuliFPZs">
+            <EntityTypeMapping TypeName="Models.ModuliFPZ">
+              <MappingFragment StoreEntitySet="ModuliFPZ">
+                <ScalarProperty Name="NazivModula" ColumnName="NazivModula" />
+                <ScalarProperty Name="IDModula" ColumnName="IDModula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrioritetProjektas">
+            <EntityTypeMapping TypeName="Models.PrioritetProjekta">
+              <MappingFragment StoreEntitySet="PrioritetProjekta">
+                <ScalarProperty Name="RazinaPrioriteta" ColumnName="RazinaPrioriteta" />
+                <ScalarProperty Name="IDPrior" ColumnName="IDPrior" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projekts">
+            <EntityTypeMapping TypeName="Models.Projekt">
+              <MappingFragment StoreEntitySet="Projekt">
+                <ScalarProperty Name="PrioritetProjekta" ColumnName="PrioritetProjekta" />
+                <ScalarProperty Name="StatusProjekta" ColumnName="StatusProjekta" />
+                <ScalarProperty Name="CiljFRMaterijali" ColumnName="CiljFRMaterijali" />
+                <ScalarProperty Name="CiljFRFinancije" ColumnName="CiljFRFinancije" />
+                <ScalarProperty Name="GodinaProjekt" ColumnName="GodinaProjekt" />
+                <ScalarProperty Name="WebAdresaProjekta" ColumnName="WebAdresaProjekta" />
+                <ScalarProperty Name="OpisProjekt" ColumnName="OpisProjekt" />
+                <ScalarProperty Name="NazivProjekt" ColumnName="NazivProjekt" />
+                <ScalarProperty Name="IDProjekt" ColumnName="IDProjekt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SharingIsCarings">
+            <EntityTypeMapping TypeName="Models.SharingIsCaring">
+              <MappingFragment StoreEntitySet="SharingIsCaring">
+                <ScalarProperty Name="VrstaDopisa" ColumnName="VrstaDopisa" />
+                <ScalarProperty Name="IDKompanija" ColumnName="IDKompanija" />
+                <ScalarProperty Name="KontaktKompanije" ColumnName="KontaktKompanije" />
+                <ScalarProperty Name="OdgClan" ColumnName="OdgClan" />
+                <ScalarProperty Name="OsobniKomentarDopisa" ColumnName="OsobniKomentarDopisa" />
+                <ScalarProperty Name="PrimjerDopisa" ColumnName="PrimjerDopisa" />
+                <ScalarProperty Name="DatumIzmjene" ColumnName="DatumIzmjene" />
+                <ScalarProperty Name="IDSiC" ColumnName="IDSiC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_Zadatka">
+            <EntityTypeMapping TypeName="Models.Status_Zadatka">
+              <MappingFragment StoreEntitySet="Status_Zadatka">
+                <ScalarProperty Name="Status_Zadatka1" ColumnName="Status_Zadatka" />
+                <ScalarProperty Name="ID_SZ" ColumnName="ID_SZ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusProjektas">
+            <EntityTypeMapping TypeName="Models.StatusProjekta">
+              <MappingFragment StoreEntitySet="StatusProjekta">
+                <ScalarProperty Name="NazivStatProj" ColumnName="NazivStatProj" />
+                <ScalarProperty Name="IDStatusProj" ColumnName="IDStatusProj" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusSuradnjas">
+            <EntityTypeMapping TypeName="Models.StatusSuradnja">
+              <MappingFragment StoreEntitySet="StatusSuradnja">
+                <ScalarProperty Name="StatusNaziv" ColumnName="StatusNaziv" />
+                <ScalarProperty Name="IDStatusSuradnja" ColumnName="IDStatusSuradnja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suradnjas">
+            <EntityTypeMapping TypeName="Models.Suradnja">
+              <MappingFragment StoreEntitySet="Suradnja">
+                <ScalarProperty Name="MaterijalnaVrijednost" ColumnName="MaterijalnaVrijednost" />
+                <ScalarProperty Name="FinancijskaVrijednost" ColumnName="FinancijskaVrijednost" />
+                <ScalarProperty Name="DatumZadnjegKontakta" ColumnName="DatumZadnjegKontakta" />
+                <ScalarProperty Name="IDKompanija" ColumnName="IDKompanija" />
+                <ScalarProperty Name="IDProjekt" ColumnName="IDProjekt" />
+                <ScalarProperty Name="KontaktKompanije" ColumnName="KontaktKompanije" />
+                <ScalarProperty Name="StatusSuradnja" ColumnName="StatusSuradnja" />
+                <ScalarProperty Name="TipSuradnja" ColumnName="TipSuradnja" />
+                <ScalarProperty Name="OdgovoranClan" ColumnName="OdgovoranClan" />
+                <ScalarProperty Name="KomentarSuradnja" ColumnName="KomentarSuradnja" />
+                <ScalarProperty Name="IDSuradnja" ColumnName="IDSuradnja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Models.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipSuradnjes">
+            <EntityTypeMapping TypeName="Models.TipSuradnje">
+              <MappingFragment StoreEntitySet="TipSuradnje">
+                <ScalarProperty Name="TipSuradnja" ColumnName="TipSuradnja" />
+                <ScalarProperty Name="IDTipSuradnja" ColumnName="IDTipSuradnja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UlogaUSustavus">
+            <EntityTypeMapping TypeName="Models.UlogaUSustavu">
+              <MappingFragment StoreEntitySet="UlogaUSustavu">
+                <ScalarProperty Name="NazivUloge" ColumnName="NazivUloge" />
+                <ScalarProperty Name="IDUUS" ColumnName="IDUUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uploaded_File">
+            <EntityTypeMapping TypeName="Models.Uploaded_File">
+              <MappingFragment StoreEntitySet="Uploaded_File">
+                <ScalarProperty Name="Suradnja" ColumnName="Suradnja" />
+                <ScalarProperty Name="Kontakt" ColumnName="Kontakt" />
+                <ScalarProperty Name="Kompanija" ColumnName="Kompanija" />
+                <ScalarProperty Name="SIC" ColumnName="SIC" />
+                <ScalarProperty Name="Projekt" ColumnName="Projekt" />
+                <ScalarProperty Name="Clan" ColumnName="Clan" />
+                <ScalarProperty Name="Upload_Date" ColumnName="Upload_Date" />
+                <ScalarProperty Name="File_Content" ColumnName="File_Content" />
+                <ScalarProperty Name="File_Extension" ColumnName="File_Extension" />
+                <ScalarProperty Name="Content_Type" ColumnName="Content_Type" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID_File" ColumnName="ID_File" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zadatak_Projekta">
+            <EntityTypeMapping TypeName="Models.Zadatak_Projekta">
+              <MappingFragment StoreEntitySet="Zadatak_Projekta">
+                <ScalarProperty Name="Projekt" ColumnName="Projekt" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="ID_Zadatak" ColumnName="ID_Zadatak" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram1" FunctionName="Models.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram1" FunctionName="Models.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram1" FunctionName="Models.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition1" FunctionName="Models.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.sp_helpdiagramdefinition1_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams1" FunctionName="Models.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.sp_helpdiagrams1_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram1" FunctionName="Models.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="Models.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

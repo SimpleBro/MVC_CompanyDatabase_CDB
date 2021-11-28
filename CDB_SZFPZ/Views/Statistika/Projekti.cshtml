@@ -1,0 +1,229 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Projekti";
+}
+
+<h2>Projekti</h2>
+
+<div class="row">
+    <div class="col-sm-5">
+        Podjela projekata prema statusu
+        <p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayName("Ukupno")
+                    </th>
+                    <th>
+                        @Html.DisplayName("U tijeku")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Završen")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Odgođen")
+                    </th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>
+                        @ViewBag.UkProj
+                    </td>
+                    <td>
+                        @ViewBag.BrojUTijeku (@ViewBag.PostotakUTijeku%)
+                    </td>
+                    <td>
+                        @ViewBag.BrojZavrsen (@ViewBag.PostotakZavrsen%)
+                    </td>
+                    <td>
+                        @ViewBag.BrojOdgoden (@ViewBag.PostotakOdgoden%)
+                    </td>
+                </tr>
+            </table>
+        </p>
+    </div>
+    <div class="col-sm-5">
+        Podjela projekata prema prioritetu
+        <p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayName("Critical")
+                    </th>
+                    <th>
+                        @Html.DisplayName("High")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Medium")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Low")
+                    </th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>
+                        @ViewBag.BrojCrit (@ViewBag.PostotakCrit%)
+                    </td>
+                    <td>
+                        @ViewBag.BrojHigh (@ViewBag.PostotakHigh%)
+                    </td>
+                    <td>
+                        @ViewBag.BrojMed (@ViewBag.PostotakMed%)
+                    </td>
+                    <td>
+                        @ViewBag.BrojLow (@ViewBag.PostotakLow%)
+                    </td>
+                </tr>
+            </table>
+        </p>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Ukupno")
+            </th>
+            <th>
+                @Html.DisplayName("Skupljena sredstva [HRK]")
+            </th>
+            <th>
+                @Html.DisplayName("Ostvarenih suradnji")
+            </th>
+            <th>
+                @Html.DisplayName("Uspješnih suradnji")
+            </th>
+            <th>
+                @Html.DisplayName("Uključenih kompanija")
+            </th>
+            <th>
+                @Html.DisplayName("Angažiranih članova")
+            </th>
+            <th></th>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                @ViewBag.ukupnoSkupljenihPara
+            </td>
+            <td>
+                @ViewBag.ukupnoSur
+            </td>
+            <td>
+                @ViewBag.ukupnoUspjSur (@ViewBag.postotakUspjesnih%)
+            </td>
+            <td>
+                @ViewBag.ukupnoKomp
+            </td>
+            <td>
+                @ViewBag.ukupnoAngazCl
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayName("Prosječno po projektu")
+            </th>
+            <th>
+                @Html.DisplayName("")
+            </th>
+            <th>
+                @Html.DisplayName("")
+            </th>
+            <th>
+                @Html.DisplayName("")
+            </th>
+            <th>
+                @Html.DisplayName("")
+            </th>
+            <th>
+                @Html.DisplayName("")
+            </th>
+            <th></th>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                @ViewBag.prosjekSkupljenihPara
+            </td>
+            <td>
+                @ViewBag.prosjekSur
+            </td>
+            <td>
+                @ViewBag.prosjekUspjSur
+            </td>
+            <td>
+                @ViewBag.prosjekKomp
+            </td>
+            <td>
+                @ViewBag.prosjekAngazCl
+            </td>
+        </tr>
+    </table>
+</div>
+
+<hr />
+
+<div class="row">
+    <h3 style="clear: both; text-align: center;">
+        Leaderboard
+    </h3>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Projekt")
+            </th>
+            <th>
+                @Html.ActionLink("Skupljena sredstva [HRK]", "Projekti", new { sortOrder = ViewBag.KesMoneySort })
+            </th>
+            <th>
+                @Html.ActionLink("Uspješnih suradnji", "Projekti", new { sortOrder = ViewBag.UspjSurSort })
+            </th>
+            <th>
+                @Html.ActionLink("Ostvarenih suradnji", "Projekti", new { sortOrder = ViewBag.UkupnoSurSort })
+            </th>
+            <th>
+                @Html.ActionLink("Uključenih kompanija", "Projekti", new { sortOrder = ViewBag.KontKompSort })
+            </th>
+            <th>
+                @Html.ActionLink("Angažiranih članova", "Projekti", new { sortOrder = ViewBag.AngazClan })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in ViewBag.Projkti)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((string)item.NazivProj, "Details", "Projekts", new { id = item.IDProj }, null)
+                </td>
+                <td>
+                    @item.Pare (@item.PostotakPara%)
+                </td>
+                <td>
+                    @item.UspjSur (@item.PostotakUspj%)
+                </td>
+                <td>
+                    @item.BrojSur
+                </td>
+                <td>
+                    @item.BrojKomp
+                </td>
+                <td>
+                    @item.AngazClanovi
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="row" style="text-align:center">
+    @Html.PagedListPager((PagedList.IPagedList)ViewBag.Projkti, page => Url.Action("Projekti", new { page, sortOrder = ViewBag.LastSorter }),
+    new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 10, DisplayItemSliceAndTotal = true })
+</div>

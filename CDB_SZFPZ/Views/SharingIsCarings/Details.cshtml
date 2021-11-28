@@ -1,0 +1,135 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model CDB_SZFPZ.Models.SharingIsCaring
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 style="text-align:center">Primjer člana @Html.DisplayFor(model => model.ClanFROdbora.ImePrezime)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="col-sm-3">
+                <label>Kompanija</label>
+                <p>@Html.DisplayFor(model => model.Kompanija.NazivKompanija)</p>
+            </div>
+            <div class="col-sm-3">
+                <label>Kontakt</label>
+                <p>@Html.DisplayFor(model => model.KontaktKompanije1.ImePrezimeKontakta)</p>
+            </div>
+            <div class="col-sm-3">
+                <label>Tip suradnje</label>
+                <p>@Html.DisplayFor(model => model.TipSuradnje.TipSuradnja)</p>
+            </div>
+            <div class="col-sm-3">
+                <label>Datum zadnje izmjene</label>
+                <p>@Model.DatumIzmjene.Value.Date.ToString("dd'/'M'/'yyyy")</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-12">
+                <label>Komentar</label>
+                @Html.TextArea("OsobniKomentarDopisa", (string)(ViewBag.Kom), new { @class = "form-control", @Value = ViewBag.Kom, @placeholder = "Enter a value", style = "text-align:center;" })
+                @*<p>@Html.DisplayFor(model => model.OsobniKomentarDopisa)</p>*@
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-12">
+                <label>Primjer dopisa</label>
+                @Html.TextArea("PrimjerDopisa", (string)(ViewBag.Dopis), new { @class = "form-control", @Value = ViewBag.Dopis, @placeholder = "Enter a value", style = "text-align:center;" })
+                @*<p>@Html.DisplayFor(model => model.PrimjerDopisa)</p>*@
+            </div>
+        </div>
+    </dl>
+
+    <hr />
+
+    <h4 style="text-align:center">
+        @Html.ActionLink("Uredi primjer", "Edit", new { id = Model.IDSiC }) |
+        @Html.ActionLink("Izbriši primjer", "Delete", new { id = Model.IDSiC }) |
+        @Html.ActionLink("Popis primjera", "Index")
+    </h4>
+
+    <hr />
+
+    @using (Html.BeginForm("Upload_File", "SharingIsCarings", new { parent_ID = Model.IDSiC }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row">
+            <div class="col-sm-1">
+                <label style="clear: both; text-align: left;">
+                    Dokumenti
+                </label>
+            </div>
+            <div class="col-sm-5">
+                <input type="file" name="postedFile" class="btn btn-default" style="width:500px;" />
+            </div>
+            <div class="col-sm-3">
+                <button type="submit" name="Btn_Upload_File" value="Upload" class="btn btn-default" style="font-size : 14px; width:160px;"><span class="glyphicon glyphicon-cloud-upload navbar-link" style="color:green"></span></button>
+            </div>
+        </div>
+    }
+
+    <hr />
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Dies Domini:", "Details", new { sortOrder = ViewBag.DateSort, id = Model.IDSiC })
+            </th>
+            <th>
+                <span class="glyphicon glyphicon-cloud-download navbar-link" style="color:green"></span> @Html.ActionLink(" File name:", "Details", new { sortOrder = ViewBag.NameSort, id = Model.IDSiC })
+            </th>
+            <th>
+                @Html.ActionLink("File size:", "Details", new { sortOrder = ViewBag.SizeSort, id = Model.IDSiC })
+            </th>
+            <th>
+                @Html.ActionLink("File extension:", "Details", new { sortOrder = ViewBag.ExtensionSort, id = Model.IDSiC })
+            </th>
+            <th>
+                @Html.ActionLink("Uploaded by:", "Details", new { sortOrder = ViewBag.UploadedBySort, id = Model.IDSiC })
+            </th>
+            <th>
+                <span class="glyphicon glyphicon-warning-sign navbar-link" style="color:red"></span>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in ViewBag.Dokumenti)
+        {
+            <tr>
+                <td>
+                    @item.Upload_Date.ToString("dd'/'M'/'yyyy")
+                </td>
+                <td>
+                    @Html.ActionLink(" " + (string)item.Name, "Download_File", new { id = item.ID_File }, htmlAttributes: new { @class = "glyphicon glyphicon-cloud-download navbar-link", @style = "color:green" })
+                </td>
+                <td>
+                    @item.Size KB
+                </td>
+                <td>
+                    @item.File_Extension
+                </td>
+                <td>
+                    @Html.ActionLink((string)item.ClanFROdbora.ImePrezime, "Details", "Members", new { id = item.ClanFROdbora.IDClan }, null)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "DeleteFile", new { id = item.ID_File, parent_ID = Model.IDSiC }, htmlAttributes: new { @class = "glyphicon glyphicon-remove navbar-link", @style = "color:red" })
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="row" style="text-align:center">
+        @Html.PagedListPager((PagedList.IPagedList)ViewBag.Dokumenti, page3 => Url.Action("Details", new { page3, id = Model.IDSiC, sortOrder = ViewBag.LastSorter }),
+        new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 10, DisplayItemSliceAndTotal = true })
+    </div>
+</div>

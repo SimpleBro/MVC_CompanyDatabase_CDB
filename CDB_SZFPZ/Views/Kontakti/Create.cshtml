@@ -1,0 +1,106 @@
+﻿@model CDB_SZFPZ.Models.KontaktKompanije
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2 style="text-align:center">Stvori kontakt</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Ime*
+                </label>
+                @Html.EditorFor(model => model.ImeKontakt, new { htmlAttributes = new { @Value = ViewBag.Ime, @placeholder = "Enter a value", style = "text-align:center;", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImeKontakt, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Prezime*
+                </label>
+                @Html.EditorFor(model => model.PrezimeKontakt, new { htmlAttributes = new { @Value = ViewBag.Prezime, @placeholder = "Enter a value", style = "text-align:center;", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PrezimeKontakt, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Aktivan kontakt*
+                </label>
+                @Html.EditorFor(model => model.ZaposlenValidan, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ZaposlenValidan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    E-mail*
+                </label>
+                @Html.EditorFor(model => model.EmailKontakt, new { htmlAttributes = new { @Value = ViewBag.Email, @placeholder = "Enter a value", @class = "form-control", style = "text-align:center;" } })
+                @Html.ValidationMessageFor(model => model.EmailKontakt, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Telefon
+                </label>
+                @Html.EditorFor(model => model.TelefonKontakt, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.Telefon, @placeholder = "Enter a value", style = "text-align:center;" } })
+                @Html.ValidationMessageFor(model => model.TelefonKontakt, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Mobitel
+                </label>
+                @Html.EditorFor(model => model.MobitelKontakt, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.Mobitel, @placeholder = "Enter a value", style = "text-align:center;" } })
+                @Html.ValidationMessageFor(model => model.MobitelKontakt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Funkcija*
+                </label>
+                @Html.EditorFor(model => model.FunkcijaUKompaniji, new { htmlAttributes = new { @Value = ViewBag.Funkcija, @placeholder = "Enter a value", @class = "form-control", style = "text-align:center;" } })
+                @Html.ValidationMessageFor(model => model.FunkcijaUKompaniji, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Kompanija* | @Html.ActionLink("Stvori novu kompaniju", "Create", "Kompanijas")
+                </label>
+                @Html.DropDownList("IDKompanijaKontakta", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IDKompanijaKontakta, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Opis
+                </label>
+                @Html.TextArea("OpisKontakta", (string)(ViewBag.OpisKontakta), new { @class = "form-control", @placeholder = "Enter a value", style = "text-align:center;" })
+                @Html.ValidationMessageFor(model => model.OpisKontakta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+       <h4 style="text-align:center">
+           <div class="form-group">
+               <div class="form-actions no-color">
+                   <input type="submit" value="Create" class="btn btn-default" style="font-size : 14px; height:50px; width:160px;" />
+               </div>
+           </div>
+           <hr />
+           @Html.ActionLink("Popis kontakata", "Index")
+       </h4>
+    </div>
+}

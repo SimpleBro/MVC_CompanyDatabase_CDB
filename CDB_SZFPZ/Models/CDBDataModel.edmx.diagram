@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ca2b4d4a8b694a80a85880f60717da9d" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="Models.AktivanClan" Width="1.5" PointX="3.75" PointY="14.125" />
+        <EntityTypeShape EntityType="Models.ClanFROdbora" Width="1.5" PointX="6" PointY="10.375" />
+        <EntityTypeShape EntityType="Models.Kompanija" Width="1.5" PointX="0.75" PointY="4.625" />
+        <EntityTypeShape EntityType="Models.KontaktKompanije" Width="1.5" PointX="3" PointY="4.375" />
+        <EntityTypeShape EntityType="Models.ModuliFPZ" Width="1.5" PointX="3.75" PointY="9.375" />
+        <EntityTypeShape EntityType="Models.PrioritetProjekta" Width="1.5" PointX="6" PointY="18.5" />
+        <EntityTypeShape EntityType="Models.Projekt" Width="1.5" PointX="8.25" PointY="16.25" />
+        <EntityTypeShape EntityType="Models.SharingIsCaring" Width="1.5" PointX="8.25" PointY="4.5" />
+        <EntityTypeShape EntityType="Models.Status_Zadatka" Width="1.5" PointX="8.25" PointY="13.25" />
+        <EntityTypeShape EntityType="Models.StatusProjekta" Width="1.5" PointX="6" PointY="16.125" />
+        <EntityTypeShape EntityType="Models.StatusSuradnja" Width="1.5" PointX="3" PointY="1.5" />
+        <EntityTypeShape EntityType="Models.Suradnja" Width="1.5" PointX="5.25" PointY="4" />
+        <EntityTypeShape EntityType="Models.sysdiagram" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Models.TipSuradnje" Width="1.5" PointX="6" PointY="0.875" />
+        <EntityTypeShape EntityType="Models.UlogaUSustavu" Width="1.5" PointX="3.75" PointY="11.75" />
+        <EntityTypeShape EntityType="Models.Uploaded_File" Width="1.5" PointX="10.5" PointY="3.875" />
+        <EntityTypeShape EntityType="Models.Zadatak_Projekta" Width="1.5" PointX="10.5" PointY="16.875" />
+        <AssociationConnector Association="Models.FK__ClanFROdb__Aktiv__18B6AB08" />
+        <AssociationConnector Association="Models.FK__ClanFROdb__Modul__16CE6296" />
+        <AssociationConnector Association="Models.FK__ClanFROdb__Uloga__17C286CF" />
+        <AssociationConnector Association="Models.FK__SharingIs__OdgCl__2704CA5F" />
+        <AssociationConnector Association="Models.FK__Suradnja__Odgovo__1D7B6025" />
+        <AssociationConnector Association="Models.FK__Uploaded_F__Clan__5E54FF49" />
+        <AssociationConnector Association="Models.FK__KontaktKo__IDKom__0B5CAFEA" />
+        <AssociationConnector Association="Models.FK__SharingIs__IDKom__28ED12D1" />
+        <AssociationConnector Association="Models.FK__Suradnja__IDKomp__22401542" />
+        <AssociationConnector Association="Models.FK__Uploaded___Kompa__61316BF4" />
+        <AssociationConnector Association="Models.FK__SharingIs__Konta__27F8EE98" />
+        <AssociationConnector Association="Models.FK__Suradnja__Kontak__2057CCD0" />
+        <AssociationConnector Association="Models.FK__Uploaded___Konta__6225902D" />
+        <AssociationConnector Association="Models.FK__Projekt__Priorit__05A3D694" />
+        <AssociationConnector Association="Models.FK__Projekt__StatusP__04AFB25B" />
+        <AssociationConnector Association="Models.FK__Suradnja__IDProj__214BF109" />
+        <AssociationConnector Association="Models.FK__Uploaded___Proje__5F492382" />
+        <AssociationConnector Association="Models.FK__Zadatak_P__Proje__6E8B6712" />
+        <AssociationConnector Association="Models.FK__SharingIs__Vrsta__29E1370A" />
+        <AssociationConnector Association="Models.FK__Uploaded_Fi__SIC__603D47BB" />
+        <AssociationConnector Association="Models.FK__Zadatak_P__Statu__6D9742D9" />
+        <AssociationConnector Association="Models.FK__Suradnja__Status__1F63A897" />
+        <AssociationConnector Association="Models.FK__Suradnja__TipSur__1E6F845E" />
+        <AssociationConnector Association="Models.FK__Uploaded___Surad__6319B466" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

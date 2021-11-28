@@ -1,0 +1,71 @@
+﻿@model CDB_SZFPZ.Models.KontaktKompanije
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 style="text-align:center">Izbriši kontakt kompanije @Html.ActionLink(Model.Kompanija.NazivKompanija, "Details", "Kompanijas", new { id = Model.Kompanija.IDKompanija }, null)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="col-sm-3">
+                <label>Ime i prezime</label>
+                <p>@Html.DisplayFor(model => model.ImePrezimeKontakta)</p>
+            </div>
+            <div class="col-sm-3">
+                <label>Email</label>
+                <p>@Html.DisplayFor(model => model.EmailKontakt)</p>
+            </div>
+            <div class="col-sm-3">
+                <label>Funckija u kompaniji</label>
+                <p>@Html.DisplayFor(model => model.FunkcijaUKompaniji)</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-3">
+                <label>Telefon</label>
+                <p>@Html.DisplayFor(model => model.TelefonKontakt)</p>
+            </div>
+            <div class="col-sm-3">
+                <label>Mobitel</label>
+                <p>@Html.DisplayFor(model => model.MobitelKontakt)</p>
+            </div>
+            <div class="col-sm-3">
+                <label>Validan</label>
+                <p>@Html.DisplayFor(model => model.ZaposlenValidan)</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-12">
+                <label style="clear: both; text-align: left;">
+                    Opis
+                </label>
+                @Html.TextArea("OpisKontakta", (string)(ViewBag.OpisKontakta), new { @class = "form-control", style = "text-align:center;" })
+                @*<p>@Html.DisplayFor(model => model.OpisKontakta)</p>*@
+            </div>
+        </div>
+    </dl>
+    <hr />
+    <h4 style="text-align:center">
+        @Html.ActionLink("Uredi kontakt", "Edit", new { id = Model.IDKontakt }) |
+        @Html.ActionLink("Detalji kontakta", "Details", new { id = Model.IDKontakt }) |
+        @Html.ActionLink("Popis kontakata", "Index")
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" style="font-size : 14px; height:50px; width:160px;" />
+            </div>
+        }
+    </h4>
+</div>

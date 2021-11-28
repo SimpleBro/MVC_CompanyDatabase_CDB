@@ -1,0 +1,74 @@
+﻿@model CDB_SZFPZ.Models.Kompanija
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <h2 style="text-align:center">Izbriši kompaniju @Model.NazivKompanija</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Adresa
+                </label>
+                <p>@Html.DisplayFor(model => model.AdresaKompanija)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Poštanski broj
+                </label>
+                <p>@Html.DisplayFor(model => model.PoštanskiBrojKompanija)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Država
+                </label>
+                <p>@Html.DisplayFor(model => model.DrzavaKompanija)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Grad
+                </label>
+                <p>@Html.DisplayFor(model => model.GradKompanija)</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <dl class="dl-horizontal">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Telefon
+                    </label>
+                    <p>@Html.DisplayFor(model => model.TelefonKompanija)</p>
+                </div>
+                <div class="col-sm-9">
+                    <label style="clear: both; text-align: left;">
+                        Opis
+                    </label>
+                    @Html.TextArea("OpisKompanija", (string)(ViewBag.OpisKompanija), new { @class = "form-control", style = "text-align:center;" })
+                    @*<p>@Html.DisplayFor(model => model.OpisKompanija)</p>*@
+                </div>
+            </div>
+        </dl>
+</div>
+
+<hr />
+
+<h4 style="text-align:center">
+    @Html.ActionLink("Uredi kompaniju", "Edit", new { id = Model.IDKompanija }) |
+    @Html.ActionLink("Detalji kompanije", "Details", new { id = Model.IDKompanija }) |
+    @Html.ActionLink("Popis kompanija", "Index")
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" style="font-size : 14px; height:50px; width:160px;" />
+        </div>
+    }
+</h4>

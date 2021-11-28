@@ -1,0 +1,86 @@
+﻿@model CDB_SZFPZ.Models.ClanFROdbora
+
+@{
+    ViewBag.Title = "Index";
+}
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="~/Slike/CDB.png" alt="Im dead" class="img-circle navbar-left" height="50" width="50" />
+                <span class="glyphicon glyphicon-home navbar-left" style="color:limegreen"></span>
+                @Html.ActionLink("CDB", "Index", "CDBLogin", new { area = "" }, new { @class = "navbar-brand navbar-left" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+<div>
+    <h2>Prijava</h2>
+</div>
+
+<body>
+    @using (Html.BeginForm("Authorize", "CDBLogin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken() //Prevent CSRF attack's
+        @Html.ValidationSummary(true)
+
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                @Html.Label("Korisničko ime", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.KorisnickoImeClana, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter a Value", style = "text-align:center;" } })
+                    @Html.ValidationMessageFor(model => model.KorisnickoImeClana, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Lozinka", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.LozinkaClana, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter a Value", type = "password", style = "text-align:center;" } })
+                    @Html.ValidationMessageFor(model => model.LozinkaClana, "", new { @class = "text-danger" })
+                    <text style="color: red">
+                        @ViewBag.Message
+                    </text>
+                </div>
+            </div>
+
+            <div class="form-group">
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-10">
+                    <input type="submit" name="Btn_Login" value="Sign in" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <body2>
+        <hr />
+        <div class=" row">
+            <div class="col-sm-4">
+                <img src="~/Slike/FPZUNIZG.png" alt="Im dead!" height="270" width="270" style="opacity:1" />
+            </div>
+            <div class="col-sm-4">
+                <img src="~/Slike/SZFPZ.png" alt="Im dead!" style="opacity:1" />
+            </div>
+        </div>
+    </body2>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<CDB_SZFPZ.Models.Kompanija>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <hr />
+
+        <body>
+            <h2 style="text-align:center">Pronađi kompaniju prema ključnoj riječi u opisu</h2>
+            <div class="row text-left">
+                <div class="col-md-4">
+                    <p>
+                        <label>Unesi 1. ključnu riječ:</label>
+                        @Html.TextBox("searchKeyWord1", "", new { @class = "form-control", @placeholder = "Enter a keyword", style = "width:300px;text-align:center;" })
+                    </p>
+                    <p>
+                        <label>Unesi 2. ključnu riječ:</label>
+                        @Html.TextBox("searchKeyWord2", "", new { @class = "form-control", @placeholder = "Enter a keyword", style = "width:300px;text-align:center;" })
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p>
+                        <input type="submit" name="Btn_Popis_Kompanija" value="Traži" class="btn btn-default" style="font-size:20px; height:100px; width:300px; background-color:ThreeDHighlight" />
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p>
+                        <label>Unesi 3. ključnu riječ:</label>
+                        @Html.TextBox("searchKeyWord3", "", new { @class = "form-control", @placeholder = "Enter a keyword", style = "width:300px;text-align:center;" })
+                    </p>
+                    <p>
+                        <label>Unesi 4. ključnu riječ:</label>
+                        @Html.TextBox("searchKeyWord4", "", new { @class = "form-control", @placeholder = "Enter a keyword", style = "width:300px;text-align:center;" })
+                    </p>
+                </div>
+            </div>
+        </body>
+
+        <hr />
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Kompanija")
+                </th>
+                <th>
+                    @Html.DisplayName("Opis")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink((string)item.NazivKompanija, "Details", "Kompanijas", new { id = item.IDKompanija }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OpisKompanija)
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <div class="row" style="text-align:center">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchKeyWord1 = ViewBag.Src1, searchKeyWord2 = ViewBag.Src2, searchKeyWord3 = ViewBag.Src3, searchKeyWord4 = ViewBag.Src4 }),
+            new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 10, DisplayItemSliceAndTotal = true })
+        </div>
+
+        <hr />
+
+        <body>
+            <div>
+                @Html.ActionLink("Odjavi se", "LogOut", "CDBLogin")
+            </div>
+        </body>
+    }
+</body>

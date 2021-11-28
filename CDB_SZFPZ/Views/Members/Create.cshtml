@@ -1,0 +1,111 @@
+﻿@model CDB_SZFPZ.Models.ClanFROdbora
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2 style="text-align:center">Stovori člana</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Ime*
+                </label>
+                @Html.EditorFor(model => model.ImeClana, new { htmlAttributes = new { @Value = ViewBag.ImeC, @placeholder = "Enter a value", @class = "form-control", style = "text-align:center;" } })
+                @Html.ValidationMessageFor(model => model.ImeClana, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Prezime*
+                </label>
+                @Html.EditorFor(model => model.PrezimeClana, new { htmlAttributes = new { @Value = ViewBag.PrezimeC, @placeholder = "Enter a value", @class = "form-control", style = "text-align:center;" } })
+                @Html.ValidationMessageFor(model => model.PrezimeClana, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    E-mail*
+                </label>
+                @Html.EditorFor(model => model.EmailClana, new { htmlAttributes = new { @Value = ViewBag.EmailC, @placeholder = "Enter a value", @class = "form-control", style = "text-align:center;" } })
+                @Html.ValidationMessageFor(model => model.EmailClana, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Mobitel
+                </label>
+                @Html.EditorFor(model => model.MobitelKontakt, new { htmlAttributes = new { @Value = ViewBag.MobitelC, @placeholder = "Enter a value", @class = "form-control", style = "text-align:center;" } })
+                @Html.ValidationMessageFor(model => model.MobitelKontakt, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Modul
+                </label>
+                @Html.DropDownList("ModulClana", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ModulClana, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Korisničko ime*
+                </label>
+                @Html.EditorFor(model => model.KorisnickoImeClana, new { htmlAttributes = new { @Value = ViewBag.KorisnickoImeC, @placeholder = "Enter a value", @class = "form-control", style = "text-align:center;" } })
+                @Html.ValidationMessageFor(model => model.KorisnickoImeClana, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Lozinka*
+                </label>
+                @Html.EditorFor(model => model.LozinkaClana, new { htmlAttributes = new { @Value = ViewBag.LozinkaC, @placeholder = "Enter a value", @class = "form-control", type = "password", style = "text-align:center;" } })
+                @Html.ValidationMessageFor(model => model.LozinkaClana, "", new { @class = "text-danger" })
+            </div>
+            @if (Convert.ToInt32(Session["Uloga"]) == 1) // admin
+            {
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Uloga*
+                    </label>
+                    @Html.DropDownList("Uloga", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Uloga, "", new { @class = "text-danger" })
+                </div>
+            }
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Aktivan, "Aktivan", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.DropDownList("Aktivan", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Aktivan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+        <h4 style="text-align:center">
+           <div class="form-group">
+               <div class="form-actions no-color">
+                   <input type="submit" value="Create" class="btn btn-default" style="font-size : 14px; height:50px; width:160px;" />
+               </div>
+           </div>
+           <hr />
+           @Html.ActionLink("Popis članova", "Index")
+       </h4>
+    </div>
+}

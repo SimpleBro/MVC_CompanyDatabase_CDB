@@ -1,0 +1,109 @@
+﻿@model CDB_SZFPZ.Models.Projekt
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 style="text-align:center">Uredi projekt @Model.NazivProjekt</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IDProjekt)
+
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Naziv*
+                </label>
+                @Html.EditorFor(model => model.NazivProjekt, new { htmlAttributes = new { @class = "form-control", style = "text-align:center;" } })
+                @Html.ValidationMessageFor(model => model.NazivProjekt, "", new { @class = "text-danger" })
+                <text style="color: red">
+                    @ViewBag.Error
+                </text>
+            </div>
+            <div class="col-sm-2">
+                <label style="clear: both; text-align: left;">
+                    Datum pokretanja
+                </label>
+                @Html.EditorFor(model => model.GodinaProjekt, new { htmlAttributes = new { @Value = ViewBag.GodE, @class = "form-control", style = "text-align:center;" } })
+                @Html.ValidationMessageFor(model => model.GodinaProjekt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Web adresa
+                </label>
+                @Html.EditorFor(model => model.WebAdresaProjekta, new { htmlAttributes = new { @class = "form-control", style = "text-align:center;" } })
+                @Html.ValidationMessageFor(model => model.WebAdresaProjekta, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-2">
+                <label style="clear: both; text-align: left;">
+                    Status*
+                </label>
+                @Html.DropDownList("StatusProjekta", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StatusProjekta, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-2">
+                <label style="clear: both; text-align: left;">
+                    Prioritet*
+                </label>
+                @Html.DropDownList("PrioritetProjekta", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PrioritetProjekta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Potrebne financije [HRK]
+                </label>
+                @Html.TextBox("CiljFRFinancije", "", new { maxlength = 9, @min = 0, @Value = ViewBag.Financ, @class = "form-control", style = "text-align:center;" })
+                @Html.ValidationMessageFor(model => model.CiljFRFinancije, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-9">
+                <label style="clear: both; text-align: left;">
+                    Potrebni materijali
+                </label>
+                @Html.TextArea("CiljFRMaterijali", (string)(ViewBag.MatE), new { @class = "form-control", style = "text-align:center;" })
+                @Html.ValidationMessageFor(model => model.CiljFRMaterijali, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-12">
+                <label style="clear: both; text-align: left;">
+                    Opis
+                </label>
+                @Html.TextArea("OpisProjekt", (string)(ViewBag.OpisE), new { @class = "form-control", style = "text-align:center;" })
+                @Html.ValidationMessageFor(model => model.OpisProjekt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+       <h4 style="text-align:center">
+           <div class="form-group">
+               <div class="form-actions no-color">
+                   <input type="submit" value="Edit" class="btn btn-default" style="font-size : 14px; height:50px; width:160px;" />
+               </div>
+           </div>
+           <hr />
+           @Html.ActionLink("Detalji projekta", "Details", new { id = Model.IDProjekt }) |
+           @Html.ActionLink("Izbriši projekt", "Delete", new { id = Model.IDProjekt }) |
+           @Html.ActionLink("Popis projekata", "Index")
+       </h4>
+    </div>
+}

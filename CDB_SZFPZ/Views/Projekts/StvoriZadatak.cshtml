@@ -1,0 +1,58 @@
+﻿@model CDB_SZFPZ.Models.Zadatak_Projekta
+
+@{
+    ViewBag.Title = "StvoriZadatak";
+}
+
+<h2>Stvori zadatak</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Naziv, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-6">
+                @Html.EditorFor(model => model.Naziv, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Naziv, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Opis, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.CiljFRMaterijali, new { htmlAttributes = new { @Value = ViewBag.Mat, @placeholder = "Enter a value", @class = "form-control", style = "text-align:center;" } })*@
+                @Html.TextArea("Opis", new { @class = "form-control", @placeholder = "Opis projektnog zadatka", style = "text-align:center;" })
+                @Html.ValidationMessageFor(model => model.Opis, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-3">
+                @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Projekt, htmlAttributes: new { @class = "control-label col-md-2", @style = "display: none" })
+            <div class="col-sm-3">
+                @Html.EditorFor(model => model.Projekt, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.ProjektID, @style = "display: none" } })
+                @Html.ValidationMessageFor(model => model.Projekt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Natrag na projekt", "Details", new { id = ViewBag.ProjektID })
+</div>

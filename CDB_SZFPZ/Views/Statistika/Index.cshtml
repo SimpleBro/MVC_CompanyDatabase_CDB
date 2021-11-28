@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Odaberi kategoriju</h2>
+<hr />
+<body>
+    @using (Html.BeginForm("StatToX", "Statistika", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <body>
+            <div class="row text-left">
+                <div class="col-md-4">
+                    <p>
+                        <input type="submit" name="Btn_Projekti" value="Projekti" class="btn btn-default" style="font-size : 20px; height:100px; width:300px; background-color:ThreeDHighlight" />
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p>
+                        <input type="submit" name="Btn_Clanovi" value="Članovi" class="btn btn-default" style="font-size : 20px; height:100px; width:300px; background-color:ThreeDHighlight" />
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p>
+                        <input type="submit" name="Btn_DISU_PARE" value="Financijsko izvješće" class="btn btn-default" style="font-size : 20px; height:100px; width:300px; background-color:ThreeDHighlight" />
+                    </p>
+                </div>
+            </div>
+        </body>
+    }
+</body>

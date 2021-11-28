@@ -1,0 +1,69 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<CDB_SZFPZ.Models.SharingIsCaring>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Sharing is caring</h2>
+<h3>
+    @Html.ActionLink("Podijeli svoje iskustvo", "Create")
+</h3>
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Član", "Index", new { sortOrder = ViewBag.ClanSSort })
+        </th>
+        <th>
+            @Html.ActionLink("Kompanija", "Index", new { sortOrder = ViewBag.KompanijaSort })
+        </th>
+        <th>
+            @Html.ActionLink("Kontakt", "Index", new { sortOrder = ViewBag.KontaktSort })
+        </th>
+        <th>
+            @Html.ActionLink("Datum", "Index", new { sortOrder = ViewBag.DateSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Tip suradnje", "Index", new { sortOrder = ViewBag.TipSort })
+        </th>
+        <th>
+            @Html.DisplayName("Komentar")
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.ClanFROdbora.ImePrezime, "Details", "Members", new { id = item.ClanFROdbora.IDClan }, null)
+            </td>
+            <td>
+                @Html.ActionLink(item.Kompanija.NazivKompanija, "Details", "Kompanijas", new { id = item.Kompanija.IDKompanija }, null)
+            </td>
+            <td>
+                @Html.ActionLink(item.KontaktKompanije1.ImePrezimeKontakta, "Details", "Kontakti", new { id = item.KontaktKompanije1.IDKontakt }, null)
+            </td>
+            <td>
+                @item.DatumIzmjene.Value.Date.ToString("dd'/'M'/'yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipSuradnje.TipSuradnja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OsobniKomentarDopisa)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDSiC }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IDSiC }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDSiC })
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="row" style="text-align:center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.LastSorter }),
+    new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 10, DisplayItemSliceAndTotal = true })
+</div>

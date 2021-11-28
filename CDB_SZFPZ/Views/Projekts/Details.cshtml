@@ -1,0 +1,360 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model CDB_SZFPZ.Models.Projekt
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 style="text-align:center">@ViewBag.NazivProjekta</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Datum pokretanja
+                </label>
+                <p>@Model.GodinaProjekt.Value.Date.ToString("dd'/'M'/'yyyy")</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Web adresa
+                </label>
+                <p>@Html.DisplayFor(model => model.WebAdresaProjekta)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Status
+                </label>
+                <p>@Html.DisplayFor(model => model.StatusProjekta1.NazivStatProj)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Prioritet
+                </label>
+                <p>@Html.DisplayFor(model => model.PrioritetProjekta1.RazinaPrioriteta)</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Potrebne financije [HRK]
+                </label>
+                <p>@Html.DisplayFor(model => model.CiljFRFinancije)</p>
+            </div>
+            <div class="col-sm-9">
+                <label style="clear: both; text-align: left;">
+                    Potrebni materijali
+                </label>
+                @Html.TextArea("CiljFRMaterijali", (string)(ViewBag.MatE), new { @class = "form-control", style = "text-align:center;" })
+                @*<p>@Html.DisplayFor(model => model.CiljFRMaterijali)</p>*@
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-12">
+                <label style="clear: both; text-align: left;">
+                    Opis
+                </label>
+                @Html.TextArea("OpisProjekt", (string)(ViewBag.OpisE), new { @class = "form-control", style = "text-align:center;" })
+                @*<p>@Html.DisplayFor(model => model.OpisProjekt)</p>*@
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row" style="text-align:center">
+            @*<div class="col-sm-offset-2 col-sm-2">
+                    <label style="clear: both; text-align: left;">
+                        <p></p>
+                        Zadaci projekta
+                    </label>
+                </div>*@
+            <button type="submit" name="ProjektIDValue" value="Stvori zadatak" class="btn btn-default"
+                    onclick="@("window.location.href='" + @Url.Action("StvoriZadatak", "Projekts", new { parent_ID = ViewBag.ProjektID }) + "'");" style="font-size : 14px; width:160px;">
+                Dodaj zadatak
+            </button>
+            @*<div class="col-sm-3">
+                    <button type="submit" name="ProjektIDValue" value="Stvori zadatak" class="btn btn-default"
+                            onclick="@("window.location.href='" + @Url.Action("StvoriZadatak", "Projekts", new { parent_ID = ViewBag.ProjektID }) + "'");" style="font-size : 14px; width:160px;">
+                        <span class="glyphicon glyphicon-plus navbar-link" style="color:green"></span>
+                    </button>
+                </div>*@
+        </div>
+
+        <hr />
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.ActionLink("Zadatak", "Details", new { sortOrder = ViewBag.Zadatak, id = ViewBag.ProjektID })
+                </th>
+                <th>
+                    @Html.ActionLink("Opis", "Details", new { sortOrder = ViewBag.OpisZadatka, id = ViewBag.ProjektID })
+                </th>
+                <th>
+                    @Html.ActionLink("Status", "Details", new { sortOrder = ViewBag.StatusZadatka, id = ViewBag.ProjektID })
+                </th>
+                <th>
+                    <span class="glyphicon glyphicon-edit navbar-link" style="color:green"></span>
+                </th>
+                <th>
+                    <span class="glyphicon glyphicon-warning-sign navbar-link" style="color:red"></span>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in ViewBag.Zadaci)
+            {
+                <tr>
+                    <td>
+                        @item.Naziv
+                    </td>
+                    <td>
+                        @item.Opis
+                    </td>
+                    <td>
+                        @item.Status_Zadatka.Status_Zadatka1
+                    </td>
+                    <td>
+                        @Html.ActionLink("Uredi", "UrediZadatak", new { id = item.ID_Zadatak, parent_ID = Model.IDProjekt })
+                    </td>
+                    <td>
+                        @Html.ActionLink(" ", "DeleteZadatak", new { id = item.ID_Zadatak, parent_ID = ViewBag.ProjektID }, htmlAttributes: new { @class = "glyphicon glyphicon-remove navbar-link", @style = "color:red" })
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <div class="row" style="text-align:center">
+            @Html.PagedListPager((PagedList.IPagedList)ViewBag.Zadaci, page4 => Url.Action("Details", new { page4, id = @ViewBag.ProjektID, sortOrder = ViewBag.LastSorter }),
+            new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 10, DisplayItemSliceAndTotal = true })
+        </div>
+
+        <hr />
+
+        @using (Html.BeginForm("Upload_File", "Projekts", new { parent_ID = ViewBag.ProjektID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <div class="col-sm-1">
+                    <label style="clear: both; text-align: left;">
+                        Dokumenti
+                    </label>
+                </div>
+                <div class="col-sm-5">
+                    <input type="file" name="postedFile" class="btn btn-default" style="width:500px;" />
+                </div>
+                <div class="col-sm-3">
+                    <button type="submit" name="Btn_Upload_File" value="Upload" class="btn btn-default" style="font-size : 14px; width:160px;"><span class="glyphicon glyphicon-cloud-upload navbar-link" style="color:green"></span></button>
+                </div>
+            </div>
+        }
+
+        <hr />
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.ActionLink("Dies Domini:", "Details", new { sortOrder = ViewBag.DateSort, id = ViewBag.ProjektID })
+                </th>
+                <th>
+                    <span class="glyphicon glyphicon-cloud-download navbar-link" style="color:green"></span> @Html.ActionLink(" File name:", "Details", new { sortOrder = ViewBag.NameSort, id = ViewBag.ProjektID })
+                </th>
+                <th>
+                    @Html.ActionLink("File size:", "Details", new { sortOrder = ViewBag.SizeSort, id = ViewBag.ProjektID })
+                </th>
+                <th>
+                    @Html.ActionLink("File extension:", "Details", new { sortOrder = ViewBag.ExtensionSort, id = ViewBag.ProjektID })
+                </th>
+                <th>
+                    @Html.ActionLink("Uploaded by:", "Details", new { sortOrder = ViewBag.UploadedBySort, id = ViewBag.ProjektID })
+                </th>
+                <th>
+                    <span class="glyphicon glyphicon-warning-sign navbar-link" style="color:red"></span>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in ViewBag.Dokumenti)
+            {
+                <tr>
+                    <td>
+                        @item.Upload_Date.ToString("dd'/'M'/'yyyy")
+                    </td>
+                    <td>
+                        @Html.ActionLink(" " + (string)item.Name, "Download_File", new { id = item.ID_File }, htmlAttributes: new { @class = "glyphicon glyphicon-cloud-download navbar-link", @style = "color:green" })
+                    </td>
+                    <td>
+                        @item.Size KB
+                    </td>
+                    <td>
+                        @item.File_Extension
+                    </td>
+                    <td>
+                        @Html.ActionLink((string)item.ClanFROdbora.ImePrezime, "Details", "Members", new { id = item.ClanFROdbora.IDClan }, null)
+                    </td>
+                    <td>
+                        @Html.ActionLink(" ", "DeleteFile", new { id = item.ID_File, parent_ID = ViewBag.ProjektID }, htmlAttributes: new { @class = "glyphicon glyphicon-remove navbar-link", @style = "color:red" })
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <div class="row" style="text-align:center">
+            @Html.PagedListPager((PagedList.IPagedList)ViewBag.Dokumenti, page3 => Url.Action("Details", new { page3, id = @ViewBag.ProjektID, sortOrder = ViewBag.LastSorter }),
+            new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 10, DisplayItemSliceAndTotal = true })
+        </div>
+    </dl>
+</div>
+
+<hr />
+
+<h4 style="text-align:center">
+    @Html.ActionLink("Uredi projekt", "Edit", new { id = Model.IDProjekt }) |
+    @Html.ActionLink("Izbriši projekt", "Delete", new { id = Model.IDProjekt }) |
+    @Html.ActionLink("Stvori novu suradnju", "Create", "Suradnjas", new { projektId = @ViewBag.ProjektID }, null) |
+    @Html.ActionLink("Popis projekata", "Index")
+</h4>
+
+<hr />
+
+<h4 style="text-align:center">
+    Skupljeno <label style="color:black"> @ViewBag.SkupljenoPara </label> od potrebnih  <label style="color:black"> @ViewBag.PotrebnoPara </label> HRK!
+</h4>
+
+<hr />
+
+<div class="row">
+    <h3 style="clear: both; text-align: center;">
+        Kompanije | Ukupno: @ViewBag.sumKompanije
+    </h3>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Naziv", "Details", new { id = @ViewBag.ProjektID, sortOrder = ViewBag.NazivKompSort })
+            </th>
+            <th>
+                @Html.DisplayName("Adresa")
+            </th>
+            <th>
+                @Html.DisplayName("Poštanski broj")
+            </th>
+            <th>
+                @Html.ActionLink("Država", "Details", new { id = @ViewBag.ProjektID, sortOrder = ViewBag.DrzavaKompSort })
+            </th>
+            <th>
+                @Html.ActionLink("Grad", "Details", new { id = @ViewBag.ProjektID, sortOrder = ViewBag.GradKompSort })
+            </th>
+            <th>
+                @Html.DisplayName("Telefon")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in ViewBag.Kompanije)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((string)item.NazivKompanija, "Details", "Kompanijas", new { id = item.IDKompanija }, null)
+                </td>
+                <td>
+                    @item.AdresaKompanija
+                </td>
+                <td>
+                    @item.PoštanskiBrojKompanija
+                </td>
+                <td>
+                    @item.DrzavaKompanija
+                </td>
+                <td>
+                    @item.GradKompanija
+                </td>
+                <td>
+                    @item.TelefonKompanija
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Kompanijas", new { id = item.IDKompanija }, null) |
+                    @Html.ActionLink("Details", "Details", "Kompanijas", new { id = item.IDKompanija }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Kompanijas", new { id = item.IDKompanija }, null)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="row" style="text-align:center">
+    @Html.PagedListPager((PagedList.IPagedList)ViewBag.Kompanije, page1 => Url.Action("Details", new { page1, id = @ViewBag.ProjektID, sortOrder = ViewBag.LastSorter }),
+    new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 10, DisplayItemSliceAndTotal = true })
+</div>
+
+<hr />
+
+<div class="row">
+    <h3 style="clear: both; text-align: center;">
+        Suradnje | Ukupno: @ViewBag.sumSuradnje
+    </h3>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Kompanija", "Details", new { id = @ViewBag.ProjektID, sortOrder = ViewBag.KompSurSort })
+            </th>
+            <th>
+                @Html.ActionLink("Odgovoran", "Details", new { id = @ViewBag.ProjektID, sortOrder = ViewBag.OdgSurSort })
+            </th>
+            <th>
+                @Html.ActionLink("Zadnji kontakt", "Details", new { id = @ViewBag.ProjektID, sortOrder = ViewBag.ZKSurSort })
+            </th>
+            <th>
+                @Html.ActionLink("Status", "Details", new { id = @ViewBag.ProjektID, sortOrder = ViewBag.StaSurSort })
+            </th>
+            <th>
+                @Html.ActionLink("Kontakt", "Details", new { id = @ViewBag.ProjektID, sortOrder = ViewBag.KontSurSort })
+            </th>
+            <th>
+                @Html.ActionLink("Tip suradnje", "Details", new { id = @ViewBag.ProjektID, sortOrder = ViewBag.TipSurSort })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in @ViewBag.Suradnje)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((string)item.Kompanija.NazivKompanija, "Details", "Kompanijas", new { id = item.IDKompanija }, null)
+                </td>
+                <td>
+                    @Html.ActionLink((string)item.ClanFROdbora.ImePrezime, "Details", "Members", new { id = item.ClanFROdbora.IDClan }, null)
+                </td>
+                <td>
+                    @item.DatumZadnjegKontakta.Date.ToString("dd'/'M'/'yyyy")
+                </td>
+                <td>
+                    @item.StatusSuradnja1.StatusNaziv
+                </td>
+                <td>
+                    @item.KontaktKompanije1.ImePrezimeKontakta
+                </td>
+                <td>
+                    @item.TipSuradnje.TipSuradnja
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Suradnjas", new { id = item.IDSuradnja }, null) |
+                    @Html.ActionLink("Details", "Details", "Suradnjas", new { id = item.IDSuradnja }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Suradnjas", new { id = item.IDSuradnja }, null)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="row" style="text-align:center">
+    @Html.PagedListPager((PagedList.IPagedList)ViewBag.Suradnje, page2 => Url.Action("Details", new { page2, id = @ViewBag.ProjektID, sortOrder = ViewBag.LastSorter }),
+    new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 10, DisplayItemSliceAndTotal = true })
+</div>

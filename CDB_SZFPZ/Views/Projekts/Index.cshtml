@@ -1,0 +1,94 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<CDB_SZFPZ.Models.Projekt>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Ukupno: @ViewBag.BrojProjekata</h2>
+
+<h3>
+    @Html.ActionLink("Stvori novi projekt", "Create")
+</h3>
+<hr />
+@using (Html.BeginForm())
+{
+    <p>
+        <div class="row">
+            <div class="col-sm-3">
+                <label>Traži po nazivu:</label>
+                @Html.DropDownList("SearchString", (SelectList)ViewBag.IDProjekt, "Svi projekti", new { @class = "form-control" })
+            </div>
+            <div class="col-sm-2">
+                <label>Traži po godini:</label>
+                @Html.Editor("searchGod", "", new { htmlAttributes = new { @class = "form-control", @min = 0, maxlength = 4, @placeholder = "Sve godine", style = "text-align:center;" } })
+            </div>
+            <div class="col-sm-2">
+                <label>Traži po prioritetu:</label>
+                @Html.DropDownList("SearchPrioritet", (SelectList)ViewBag.PrioritetProjekta, "Svi prioriteti", new { @class = "form-control" })
+            </div>
+            <div class="col-sm-2">
+                <label>Traži po statusu:</label>
+                @Html.DropDownList("SearchStatus", (SelectList)ViewBag.StatusProjekta, "Svi statusi", new { @class = "form-control" })
+            </div>
+            <div class="col-sm-2">
+                <input type="submit" name="Btn_Nadji_Projekt" value="Traži" class="btn btn-default" style="font-size : 14px; height:50px; width:150px;" />
+            </div>
+        </div>
+    </p>
+}
+<hr />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Naziv", "Index", new { sortOrder = ViewBag.IDSortParam, searchString = ViewBag.Str, SearchPrioritet = ViewBag.Prior, SearchStatus = ViewBag.Stat, searchGod = ViewBag.Godd })
+        </th>
+        <th>
+            @Html.ActionLink("Datum pokretanja", "Index", new { sortOrder = ViewBag.DateSortParam, searchString = ViewBag.Str, SearchPrioritet = ViewBag.Prior, SearchStatus = ViewBag.Stat, searchGod = ViewBag.Godd })
+        </th>
+        <th>
+            @Html.DisplayName("Web adresa")
+        </th>
+        <th>
+            @Html.ActionLink("Prioritet", "Index", new { sortOrder = ViewBag.PrioritetSortParam, searchString = ViewBag.Str, SearchPrioritet = ViewBag.Prior, SearchStatus = ViewBag.Stat, searchGod = ViewBag.Godd })
+        </th>
+        <th>
+            @Html.ActionLink("Status", "Index", new { sortOrder = ViewBag.StatusSortParam, searchString = ViewBag.Str, SearchPrioritet = ViewBag.Prior, SearchStatus = ViewBag.Stat, searchGod = ViewBag.Godd })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.NazivProjekt, "Details", "Projekts", new { id = item.IDProjekt }, null)
+            </td>
+            <td>
+                @item.GodinaProjekt.Value.Date.ToString("dd'/'M'/'yyyy")
+                @*@Html.DisplayFor(modelItem => item.GodinaProjekt.Value.Year)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WebAdresaProjekta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrioritetProjekta1.RazinaPrioriteta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusProjekta1.NazivStatProj)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDProjekt }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IDProjekt }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDProjekt })
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="row" style="text-align:center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.LastSorter, searchString = ViewBag.Str, SearchPrioritet = ViewBag.Prior, SearchStatus = ViewBag.Stat, searchGod = ViewBag.Godd }),
+    new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 10, DisplayItemSliceAndTotal = true })
+</div>

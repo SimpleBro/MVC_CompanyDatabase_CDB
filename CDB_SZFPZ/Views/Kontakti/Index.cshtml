@@ -1,0 +1,98 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<CDB_SZFPZ.Models.KontaktKompanije>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Ukupno: @ViewBag.BrojKontakata</h2>
+
+<h3>
+    @Html.ActionLink("Stvori novi kontakt", "Create")
+</h3>
+<hr />
+@using (Html.BeginForm())
+{
+    <p>
+        <div class="row">
+            <div class="col-sm-3">
+                <label>Traži po kompaniji:</label>
+                @Html.DropDownList("searchKompanija", (SelectList)ViewBag.IDKompanijaKontakta, "Sve kompanije", new { @class = "form-control" })
+            </div>
+            <div class="col-sm-3">
+                <label>Traži po kontaktu:</label>
+                @Html.DropDownList("searchKontakt", (SelectList)ViewBag.KontaktKompanije, "Svi kontakti", new { @class = "form-control" })
+            </div>
+            <div class="col-sm-3">
+                <input type="submit" name="Btn_Nadji_Kompaniju" value="Traži" class="btn btn-default" style="font-size : 14px; height:50px; width:150px;" />
+            </div>
+        </div>
+    </p>
+}
+
+<hr />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Kompanija", "Index", new { sortOrder = ViewBag.KompanijaSort, searchKompanija = ViewBag.Kompanija, searchKontakt = ViewBag.Kontakt })
+        </th>
+        <th>
+            @Html.ActionLink("Ime i prezime", "Index", new { sortOrder = ViewBag.KontaktSort, searchKompanija = ViewBag.Kompanija, searchKontakt = ViewBag.Kontakt })
+        </th>
+        <th>
+            @Html.DisplayName("Email")
+        </th>
+        <th>
+            @Html.DisplayName("Telefon")
+        </th>
+        <th>
+            @Html.DisplayName("Mobitel")
+        </th>
+        <th>
+            @Html.DisplayName("Funkcija")
+        </th>
+        <th>
+            @Html.ActionLink("Validan", "Index", new { sortOrder = ViewBag.ValidanSort, searchKompanija = ViewBag.Kompanija, searchKontakt = ViewBag.Kontakt })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Kompanija.NazivKompanija, "Details", "Kompanijas", new { id = item.Kompanija.IDKompanija }, null)
+            </td>
+            <td>
+                @Html.ActionLink(item.ImePrezimeKontakta, "Details", "Kontakti", new { id = item.IDKontakt }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailKontakt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelefonKontakt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobitelKontakt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FunkcijaUKompaniji)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZaposlenValidan)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDKontakt }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IDKontakt }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDKontakt })
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="row" style="text-align:center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.LastSorter, searchKompanija = ViewBag.Kompanija, searchKontakt = ViewBag.Kontakt }),
+    new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 10, DisplayItemSliceAndTotal = true })
+</div>

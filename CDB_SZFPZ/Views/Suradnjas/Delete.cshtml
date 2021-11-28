@@ -1,0 +1,104 @@
+﻿@model CDB_SZFPZ.Models.Suradnja
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 style="text-align:center">Izbriši suradnju</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Projekt
+                </label>
+                <p>@Html.ActionLink(Model.Projekt.NazivProjekt, "Details", "Projekts", new { id = Model.Projekt.IDProjekt }, null)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Kompanija
+                </label>
+                <p>@Html.ActionLink(Model.Kompanija.NazivKompanija, "Details", "Kompanijas", new { id = Model.Kompanija.IDKompanija }, null)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Odgovorni član
+                </label>
+                <p>@Html.ActionLink(Model.ClanFROdbora.ImePrezime, "Details", "Members", new { id = Model.ClanFROdbora.IDClan }, null)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Kontakt
+                </label>
+                <p>@Html.ActionLink(Model.KontaktKompanije1.ImePrezimeKontakta, "Details", "Kontakti", new { id = Model.KontaktKompanije1.IDKontakt }, null)</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Status suradnje
+                </label>
+                <p>@Html.DisplayFor(model => model.StatusSuradnja1.StatusNaziv)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Datum zadnjeg kontakta
+                </label>
+                <p>@Html.DisplayFor(model => model.DatumZadnjegKontakta)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Tip suradnje
+                </label>
+                <p>@Html.DisplayFor(model => model.TipSuradnje.TipSuradnja)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Ostvarena financijska vrijednost [HRK]
+                </label>
+                <p>@Html.DisplayFor(model => model.FinancijskaVrijednost)</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-6">
+                <label style="clear: both; text-align: left;">
+                    Prikupljena materijalna sredstva
+                </label>
+                @Html.TextArea("MaterijalnaVrijednost", (string)(ViewBag.Mat), new { @class = "form-control", style = "text-align:center;" })
+                @*<p>@Html.DisplayFor(model => model.MaterijalnaVrijednost)</p>*@
+            </div>
+            <div class="col-lg-6">
+                <label style="clear: both; text-align: left;">
+                    Komentar suradnje
+                </label>
+                @Html.TextArea("KomentarSuradnja", (string)(ViewBag.Mat), new { @class = "form-control", style = "text-align:center;" })
+                @*<p>@Html.DisplayFor(model => model.KomentarSuradnja)</p>*@
+            </div>
+        </div>
+
+        <hr />
+
+        <h4 style="text-align:center">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" />
+                </div>
+            }
+            <hr />
+            @Html.ActionLink("Detalji suradnje", "Edit", new { id = Model.IDSuradnja }) |
+            @Html.ActionLink("Izbriši suradnju", "Delete", new { id = Model.IDSuradnja }) |
+            @Html.ActionLink("Popis suradnji", "Index")
+        </h4>
+    </dl>
+</div>

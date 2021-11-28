@@ -1,0 +1,98 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<CDB_SZFPZ.Models.ClanFROdbora>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Ukupno: @ViewBag.BrojKontakata</h2>
+
+<h3>
+    @Html.ActionLink("Stvori novog člana", "Create")
+</h3>
+<hr />
+@using (Html.BeginForm())
+{
+    <p>
+        <div class="row">
+            <div class="col-sm-3">
+                <label>Traži po imenu i prezimenu:</label>
+                @Html.TextBox("searchClan", "", new { @class = "form-control", @placeholder = "Enter a value", style = "width:250px;text-align:center;" })
+            </div>
+            <div class="col-sm-2">
+                <label>Traži po modulu:</label>
+                @Html.DropDownList("srcModulClana", (SelectList)ViewBag.ModulClana, "Svi moduli", new { @class = "form-control" })
+            </div>
+            <div class="col-sm-2">
+                <label>Traži po ulozi:</label>
+                @Html.DropDownList("srcUloga", (SelectList)ViewBag.Uloga, "Sve uloge", new { @class = "form-control" })
+            </div>
+            <div class="col-sm-2">
+                <label>Traži po statusu:</label>
+                @Html.DropDownList("srcAktivan", (SelectList)ViewBag.Aktivan, "Svi statusi", new { @class = "form-control" })
+            </div>
+            <div class="col-sm-3">
+                <input type="submit" name="Btn_Nadji_Clana" value="Traži" class="btn btn-default" style="font-size : 14px; height:50px; width:150px;" />
+            </div>
+        </div>
+    </p>
+}
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Ime i prezime", "Index", new { sortOrder = ViewBag.ClanIP, searchClan = ViewBag.Clann, srcModulClana = ViewBag.ModulClanaa, srcUloga = ViewBag.UlogaClanaa, srcAktivan = ViewBag.Aktivana })
+        </th>
+        <th>
+            @Html.DisplayName("E-mail")
+        </th>
+        <th>
+            @Html.DisplayName("Mobitel")
+        </th>
+        <th>
+            @Html.ActionLink("Modul", "Index", new { sortOrder = ViewBag.Mod, searchClan = ViewBag.Clann, srcModulClana = ViewBag.ModulClanaa, srcUloga = ViewBag.UlogaClanaa, srcAktivan = ViewBag.Aktivana })
+        </th>
+        <th>
+            @Html.ActionLink("Uloga", "Index", new { sortOrder = ViewBag.Ul, searchClan = ViewBag.Clann, srcModulClana = ViewBag.ModulClanaa, srcUloga = ViewBag.UlogaClanaa, srcAktivan = ViewBag.Aktivana })
+        </th>
+        <th>
+            @Html.ActionLink("Aktivan", "Index", new { sortOrder = ViewBag.Akt, searchClan = ViewBag.Clann, srcModulClana = ViewBag.ModulClanaa, srcUloga = ViewBag.UlogaClanaa, srcAktivan = ViewBag.Aktivana })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.ImePrezime, "Details", "Members", new { id = item.IDClan }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailClana)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobitelKontakt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModuliFPZ.NazivModula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UlogaUSustavu.NazivUloge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AktivanClan.Aktivan)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDClan }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IDClan }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDClan })
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="row" style="text-align:center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.LastSorter, searchClan = ViewBag.Clann, srcModulClana = ViewBag.ModulClanaa, srcUloga = ViewBag.UlogaClanaa, srcAktivan = ViewBag.Aktivana }),
+    new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 10, DisplayItemSliceAndTotal = true })
+</div>

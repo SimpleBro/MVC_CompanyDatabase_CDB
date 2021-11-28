@@ -1,0 +1,86 @@
+﻿@model CDB_SZFPZ.Models.Projekt
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 style="text-align:center">Izbriši @Model.NazivProjekt</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Datum pokretanja
+                </label>
+                <p>@Model.GodinaProjekt.Value.Date.ToString("dd'/'M'/'yyyy")</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Web adresa
+                </label>
+                <p>@Html.DisplayFor(model => model.WebAdresaProjekta)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Status
+                </label>
+                <p>@Html.DisplayFor(model => model.StatusProjekta1.NazivStatProj)</p>
+            </div>
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Prioritet
+                </label>
+                <p>@Html.DisplayFor(model => model.PrioritetProjekta1.RazinaPrioriteta)</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-3">
+                <label style="clear: both; text-align: left;">
+                    Potrebne financije [HKN]
+                </label>
+                <p>@Html.DisplayFor(model => model.CiljFRFinancije)</p>
+            </div>
+            <div class="col-sm-9">
+                <label style="clear: both; text-align: left;">
+                    Potrebni materijali
+                </label>
+                @Html.TextArea("CiljFRMaterijali", (string)(ViewBag.MatE), new { @class = "form-control", style = "text-align:center;" })
+                @*<p>@Html.DisplayFor(model => model.CiljFRMaterijali)</p>*@
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-12">
+                <label style="clear: both; text-align: left;">
+                    Opis
+                </label>
+                @Html.TextArea("OpisProjekt", (string)(ViewBag.OpisE), new { @class = "form-control", style = "text-align:center;" })
+                @*<p>@Html.DisplayFor(model => model.OpisProjekt)</p>*@
+            </div>
+        </div>
+
+        <hr />
+
+        <h4 style="text-align:center">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" style="font-size : 14px; height:50px; width:160px;" />
+                </div>
+            }
+            <hr />
+            @Html.ActionLink("Detalji projekta", "Details", new { id = Model.IDProjekt }) |
+            @Html.ActionLink("Uredi projekt", "Edit", new { id = Model.IDProjekt }) |
+            @Html.ActionLink("Stvori novu suradnju", "Create", "Suradnjas", new { projektId = @ViewBag.ProjektID }, null) |
+            @Html.ActionLink("Popis projekata", "Index")
+        </h4>
+    </dl>
+</div>

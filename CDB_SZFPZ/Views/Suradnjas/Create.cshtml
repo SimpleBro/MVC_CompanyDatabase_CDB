@@ -1,0 +1,143 @@
+﻿@model CDB_SZFPZ.Models.Suradnja
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2 style="text-align:center">Stvori suradnju</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Projekt* | @Html.ActionLink("Stvori novi projekt", "Create", "Projekts")
+                    </label>
+                    @Html.DropDownList("IDProjekt", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IDProjekt, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Kompanija* | @Html.ActionLink("Stvori novu kompaniju", "Create", "Kompanijas")
+                    </label>
+                    @Html.DropDownListFor(Model => Model.IDKompanija, ViewBag.CompanyList as SelectList, "Odaberi kompaniju", htmlAttributes: new { @class = "form-control" })
+                    @*@Html.DropDownList("IDKompanija", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.ValidationMessageFor(model => model.IDKompanija, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Odgovorni član*
+                    </label>
+                    @Html.DropDownList("OdgovoranClan", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.OdgovoranClan, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Kontakt* | @Html.ActionLink("Stvori novi kontakt", "Create", "Kontakti")
+                    </label>
+                    @Html.DropDownListFor(Model => Model.KontaktKompanije, new SelectList(" "), "Odaberi kontakt", htmlAttributes: new { @class = "form-control" })
+                    @*@Html.DropDownList("KontaktKompanije", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.ValidationMessageFor(model => model.KontaktKompanije, "", new { @class = "text-danger" })
+                    <text style="color: red">
+                        @ViewBag.KontaktNP
+                    </text>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Status suradnje*
+                    </label>
+                    @Html.DropDownList("StatusSuradnja", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StatusSuradnja, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Datum zadnjeg kontakta*
+                    </label>
+                    @Html.EditorFor(model => model.DatumZadnjegKontakta, new { htmlAttributes = new { @Value = ViewBag.DatumZK, @placeholder = "Enter a value", @class = "form-control", style = "text-align:center;" } })
+                    @Html.ValidationMessageFor(model => model.DatumZadnjegKontakta, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Tip suradnje
+                    </label>
+                    @Html.DropDownList("TipSuradnja", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TipSuradnja, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    <label style="clear: both; text-align: left;">
+                        Ostvarena financijska vrijednost [HRK]
+                    </label>
+                    @Html.EditorFor(model => model.FinancijskaVrijednost, new { htmlAttributes = new { @min = 0, @Value = ViewBag.Financije, @placeholder = "Enter a value", @class = "form-control", style = "text-align:center;" } })
+                    @Html.ValidationMessageFor(model => model.FinancijskaVrijednost, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <label style="clear: both; text-align: left;">
+                        Prikupljena materijalna sredstva
+                    </label>
+                    @Html.TextArea("MaterijalnaVrijednost", (string)(ViewBag.Mat), new { @class = "form-control", @Value = ViewBag.Mat, @placeholder = "Enter a value", style = "text-align:center;" })
+                    @Html.ValidationMessageFor(model => model.MaterijalnaVrijednost, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-lg-6">
+                    <label style="clear: both; text-align: left;">
+                        Komentar suradnje
+                    </label>
+                    @Html.TextArea("KomentarSuradnja", (string)(ViewBag.Kom), new { @class = "form-control", @Value = ViewBag.Kom, @placeholder = "Enter a value", style = "text-align:center;" })
+                    @Html.ValidationMessageFor(model => model.KomentarSuradnja, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </dl>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#IDKompanija").change(function () {
+                $("#KontaktKompanije").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("DohvatiKontakte")',
+                    dataType: 'json',
+                    data: { KompID: $("#IDKompanija").val() },
+                    success: function (city) {
+
+                        $.each(city, function (i, city) {
+                            $("#KontaktKompanije").append('<option value="'
+                                + city.IDKontakt + '">'
+                                + city.ImePrezimeKontakta + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+    </script>
+
+    <hr />
+
+    <h4 style="text-align:center">
+        <div class="form-group">
+            <div class="form-actions no-color">
+                <input type="submit" value="Create" class="btn btn-default" style="font-size : 14px; height:50px; width:160px;" />
+            </div>
+        </div>
+        <hr />
+        @Html.ActionLink("Popis suradnji", "Index")
+    </h4>
+}

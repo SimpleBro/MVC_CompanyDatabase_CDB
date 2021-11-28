@@ -1,0 +1,212 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Financijsko_Izvjesce";
+}
+
+<h2>Financijsko izvješće</h2>
+
+<div class="row">
+    <div class="col-sm-4">
+        Podjela članova prema statusu
+        <p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayName("Ukupno")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Aktivan")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Umirovljen")
+                    </th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>
+                        @ViewBag.UkClan
+                    </td>
+                    <td>
+                        @ViewBag.BrojAktivan (@ViewBag.PostotakAktivan%)
+                    </td>
+                    <td>
+                        @ViewBag.BrojMirovina (@ViewBag.PostotakMirovina%)
+                    </td>
+                </tr>
+            </table>
+        </p>
+    </div>
+    <div class="col-sm-6">
+        Podjela članova prema modulu
+        <p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayName("ITS")
+                    </th>
+                    <th>
+                        @Html.DisplayName("IK")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Logistika")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Cestovni")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Gradski")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Poštanski")
+                    </th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>
+                        @ViewBag.ITSClan (@ViewBag.postITS%)
+                    </td>
+                    <td>
+                        @ViewBag.IKClan (@ViewBag.postik%)
+                    </td>
+                    <td>
+                        @ViewBag.LogClan (@ViewBag.postLog%)
+                    </td>
+                    <td>
+                        @ViewBag.CestClan (@ViewBag.postCest%)
+                    </td>
+                    <td>
+                        @ViewBag.GradClan (@ViewBag.GradClan%)
+                    </td>
+                    <td>
+                        @ViewBag.PostaClan (@ViewBag.postPosta%)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Vodni")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Zračni")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Kontrola leta")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Civilni pilot")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Vojni pilot")
+                    </th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>
+                        @ViewBag.VodaClan (@ViewBag.postVoda%)
+                    </td>
+                    <td>
+                        @ViewBag.ZrakClan (@ViewBag.postZrak%)
+                    </td>
+                    <td>
+                        @ViewBag.KontLetClan (@ViewBag.postKontLeta%)
+                    </td>
+                    <td>
+                        @ViewBag.CivilPilClan (@ViewBag.postCivilPil%)
+                    </td>
+                    <td>
+                        @ViewBag.VojniPilClan (@ViewBag.postVojniPil%)
+                    </td>
+                </tr>
+            </table>
+        </p>
+    </div>
+</div>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-sm-3">
+            <label>Unesite početni datum</label>
+            @Html.TextBox("pocDatum", "", new { @class = "form-control", @placeholder = "Nije obvezno", style = "text-align:center;", type = "date" })
+        </div>
+        <div class="col-sm-3">
+            <label>Unesite krajnji datum</label>
+            @Html.TextBox("krajDatum", "", new { @class = "form-control", @placeholder = "Nije obvezno", style = "text-align:center;", type = "date" })
+        </div>
+        <div class="col-sm-3">
+            <label>Traži po projektu:</label>
+            @Html.DropDownList("SearchProjekt", (SelectList)ViewBag.IDProjekt, "Svi projekti", new { @class = "form-control" })
+        </div>
+        <div class="col-sm-3">
+            <label>Traži po članu:</label>
+            @Html.DropDownList("SearchString", (SelectList)ViewBag.OdgClan, "Svi članovi", new { @class = "form-control" })
+        </div>
+    </div>
+    <hr />
+    <div class="row" style="text-align:center">
+        <div>
+            <input type="submit" name="Btn_Nadji_Clana" value="Filtriraj" class="btn btn-default" style="font-size : 14px; height:60px; width:200px;" />
+        </div>
+    </div>
+}
+
+<hr />
+
+<div class="row">
+    <h3 style="clear: both; text-align: center;">
+        Leaderboard <span>@(ViewBag.NazivProjekta != null ? ("za projekt: ") : "")</span><a href="@Url.Action("Details", "Projekts", new { id = ViewBag.SearchProjekt }, null)"><span>@(ViewBag.NazivProjekta != null ? ViewBag.NazivProjekta : "")</span></a>
+        @*Leaderboard <span @Html.ActionLink("Details", "Kompanijas", new { id = ViewBag.KompIdd }, null)>@(ViewBag.NazivProjekta != null ? ("za projekt: " + ViewBag.NazivProjekta) : "")</span>*@
+    </h3>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Član", "ClanoviNastupaju", new { sortOrder = ViewBag.ClanSort, pocDatum = @ViewBag.Poc, krajDatum = ViewBag.Kraj, SearchString = ViewBag.SearchString, SearchProjekt = ViewBag.SearchProjekt })
+            </th>
+            <th>
+                @Html.ActionLink("Skupljena sredstva [HRK]", "ClanoviNastupaju", new { sortOrder = ViewBag.KesMoneySort, pocDatum = @ViewBag.Poc, krajDatum = ViewBag.Kraj, SearchString = ViewBag.SearchString, SearchProjekt = ViewBag.SearchProjekt })
+            </th>
+            <th>
+                @Html.ActionLink("Uspješnih suradnji", "ClanoviNastupaju", new { sortOrder = ViewBag.UspjSurSort, pocDatum = @ViewBag.Poc, krajDatum = ViewBag.Kraj, SearchString = ViewBag.SearchString, SearchProjekt = ViewBag.SearchProjekt })
+            </th>
+            <th>
+                @Html.ActionLink("Ukupno suradnji", "ClanoviNastupaju", new { sortOrder = ViewBag.UkupnoSurSort, pocDatum = @ViewBag.Poc, krajDatum = ViewBag.Kraj, SearchString = ViewBag.SearchString, SearchProjekt = ViewBag.SearchProjekt })
+            </th>
+            <th>
+                @Html.ActionLink("Kontaktiranih kompanija", "ClanoviNastupaju", new { sortOrder = ViewBag.KontKompSort, pocDatum = @ViewBag.Poc, krajDatum = ViewBag.Kraj, SearchString = ViewBag.SearchString, SearchProjekt = ViewBag.SearchProjekt })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in ViewBag.Memberi)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink((string)item.NazivProj, "Details", "Members", new { id = item.IDProj }, null)
+                </td>
+                <td>
+                    @item.Pare
+                    <span>@( item.PercUkPara != 0 ? ("(" + item.PercUkPara + "%)") : "")</span>
+                    @*@( condition ? "true" : "false" )*@
+                </td>
+                <td>
+                    @item.UspjSur
+                    <span>@( item.PostotakUspj != 0 ? ("(" + item.PostotakUspj + "%)") : "")</span>
+                </td>
+                <td>
+                    @item.BrojSur
+                    <span>@( item.PerUkSuradnji != 0 ? ("(" + item.PerUkSuradnji + "%)") : "")</span>
+                </td>
+                <td>
+                    @item.BrojKomp
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="row" style="text-align:center">
+    @Html.PagedListPager((PagedList.IPagedList)ViewBag.Memberi, page => Url.Action("ClanoviNastupaju", new { page, sortOrder = ViewBag.LastSorter, pocDatum = @ViewBag.Poc, krajDatum = ViewBag.Kraj, SearchString = ViewBag.SearchString, SearchProjekt = ViewBag.SearchProjekt }),
+    new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 10, DisplayItemSliceAndTotal = true })
+</div>
